@@ -1,0 +1,2 @@
+class MerchantBuilder
+end

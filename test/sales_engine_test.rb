@@ -7,14 +7,4 @@ class SalesEngineTest < MiniTest::Unit::TestCase
     assert_kind_of SalesEngine, sales_engine
   end
 
-  # def test_that_merchant_csv_loads_upon_startup
-  #   sales_engine = SalesEngine.new
-  #   assert_equal "Load complete!", sales_engine.startup
-  # end
-
-  # def test_that_merchant_csv_parsed_correctly
-  #   sales_engine = SalesEngine.new
-  #   assert_equal 100, sales_engine.startup
-  # end
-
 end
