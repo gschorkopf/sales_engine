@@ -8,10 +8,6 @@ require './lib/transaction'
 
 class SalesEngine
 
-  def initialize
-
-  end
-
   def startup
     CustomerBuilder.load_customers
     InvoiceBuilder.load_invoices
