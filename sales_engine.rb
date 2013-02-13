@@ -7,6 +7,7 @@ require './lib/invoice_item'
 require './lib/transaction'
 
 class SalesEngine
+
   # def initialize
 
   # end
@@ -16,4 +17,3 @@ class SalesEngine
   # end
 
 end
-
