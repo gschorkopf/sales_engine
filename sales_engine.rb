@@ -8,17 +8,17 @@ require './lib/transaction'
 
 class SalesEngine
 
-  # def initialize
+  def initialize
 
-  # end
+  end
 
-  # def startup
-
-    
-  # end
-
-  # def startup
-    
-  # end
+  def startup
+    CustomerBuilder.load_customers
+    InvoiceBuilder.load_invoices
+    InvoiceItemBuilder.load_invoice_items
+    ItemBuilder.load_items
+    MerchantBuilder.load_merchants
+    TransactionBuilder.load_transactions
+  end
 
 end
