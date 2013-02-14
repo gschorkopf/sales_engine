@@ -2,7 +2,7 @@ class Item
   attr_reader :id, :name, :description, :unit_price, :merchant_id, :created_at, :updated_at
 
   def initialize(hash)
-    @id = hash['id']
+    @id = hash['id'].to_i
     @name = hash['name']
     @description = hash['description']
     @unit_price = hash['unit_price']
@@ -24,35 +24,35 @@ class Item
   end
 
   def self.find_by_name(input) 
-    @item_totals.find_by_name {|item| item.name == input}
+    @item_totals.find {|item| item.name == input}
   end
 
   def self.find_all_by_name(input)
-    @item_totals.find_all_by_name {|item| item.name == input}
+    @item_totals.find_all {|item| item.name == input}
   end
 
   def self.find_by_description(input)
-    @item_totals.find_by_description {|item| item.description == input}
+    @item_totals.find {|item| item.description == input}
   end
 
   def self.find_all_by_description(input)
-    @item_totals.find_all_by_description {|item| item.description == input}
+    @item_totals.find_all{|item| item.description == input}
   end
 
   def self.find_by_unit_price(input) 
-    @item_totals.find_by_unit_price {|item| item.unit_price == input}
+    @item_totals.find {|item| item.unit_price == input}
   end
 
   def self.find_all_by_unit_price(input)
-    @item_totals.find_all_by_unit_price {|item| item.unit_price == input}
+    @item_totals.find_all {|item| item.unit_price == input}
   end  
 
   def self.find_by_merchant_id(input) 
-    @item_totals.find_by_merchant_id {|item| item.merchant_id == input}
+    @item_totals.find {|item| item.merchant_id == input}
   end
 
   def self.find_all_by_merchant_id(input)
-    @item_totals.find_all_by_merchant_id {|item| item.merchant_id == input}
+    @item_totals.find_all {|item| item.merchant_id == input}
   end
 end
 

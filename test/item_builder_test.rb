@@ -3,7 +3,7 @@ require './test/support'
 class ItemBuilderTest < MiniTest::Unit::TestCase
   
   def setup
-    @output = ItemBuilder.load_items("./sample/samp_items.csv")
+    @output = ItemBuilder.from_csv("./sample/samp_items.csv")
   end
 
   def test_it_exists

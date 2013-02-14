@@ -3,7 +3,7 @@ require './test/support'
 class MerchantBuilderTest < MiniTest::Unit::TestCase
   
   def setup
-    @output = MerchantBuilder.load_merchants("./sample/samp_merchants.csv")
+    @output = MerchantBuilder.from_csv("./sample/samp_merchants.csv")
   end
 
   def test_it_exists
