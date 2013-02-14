@@ -1,16 +1,13 @@
 class CustomerBuilder
 
   def self.load_customers(filename="./data/customers.csv")
-    customer_file = CSV.open(filename, headers: true)
-    parse_customers(customer_file)
+    parse_customers CSV.open(filename, headers: true)
   end
 
   def self.parse_customers(customer_file)
-    customer_totals = []
-    customer_file.collect do |customer|
-      customer_totals << Customer.new(customer)
+    customers = customer_file.collect do |customer|
+      Customer.new(customer)
     end
-    Customer.store_array(customer_totals)
-    return customer_totals
+    Customer.store(customers)
   end
 end
