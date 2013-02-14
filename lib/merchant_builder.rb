@@ -1,22 +1,17 @@
 class MerchantBuilder
-  def self.load_merchants
-    merchant_file = CSV.open('./data/merchants.csv', headers: true, header_converters: :symbol)
+
+  def self.load_merchants(filename="./data/merchants.csv")
+    merchant_file = CSV.open(filename, headers: true)
     parse_merchants(merchant_file)
   end
 
-  def self.parse_merchants(merchant_file)
+  def self.parse_merchant(merchant_file)
     merchant_totals = []
-    merchant_file.each do |merchant|
-      merchant  = {
-                id: merchant[:id],
-                name: merchant[:name],
-                created_at: merchant[:created_at],
-                updated_at: merchant[:updated_at],
-                   }
-      merchant_totals << merchant
+    merchant_file.collect do |merchant|
+      merchant_totals << Merchant.new(merchant)
     end
-  # Merchant.new(@merchant_totals)
-  return merchant_totals
+    Merchant.store_array(merchant_totals)
+    return merchant_totals
   end
 
 end
