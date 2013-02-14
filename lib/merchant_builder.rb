@@ -1,17 +1,14 @@
 class MerchantBuilder
 
-  def self.load_merchants(filename="./data/merchants.csv")
-    merchant_file = CSV.open(filename, headers: true)
-    parse_merchants(merchant_file)
+  def self.from_csv(filename="./data/merchants.csv")
+    parse = CSV.open(filename, headers: true)
   end
 
-  def self.parse_merchants(merchant_file)
-    merchant_totals = []
-    merchant_file.collect do |merchant|
-      merchant_totals << Merchant.new(merchant)
+  def self.parse(merchant_file)
+    merchants = merchant_file.collect do |merchant|
+      Merchant.new(merchant)
     end
     Merchant.store_array(merchant_totals)
-    return merchant_totals
   end
 
 end

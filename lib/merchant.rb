@@ -8,13 +8,24 @@ class Merchant
     @updated_at = hash['updated_at']
   end
 
-  def self.store_array(array)
+  def self.store(array)
     @merchant_totals = array
   end
 
-  # def self.find_all_by_store_name(input)
-  #   store_names_found = @merchant_totals.find_all {|merchant| merchant.store_name == input}
-  #   return store_names_found
-  # end
+  def self.find_by_id(input)
+    @merchant_totals.find {|merchant| merchant.id == input.to_i}
+  end
+
+  def self.find_all_by_id(input)
+    @merchant_totals.find_all {|merchant| merchant.id == input.to_i}
+  end
+
+  def self.find_by_name(input) 
+    @merchant_totals.find_by_name {|merchant| merchant.name == input}
+  end
+
+  def self.find_all_by_name(input)
+    @merchant_totals.find_all_by_name {|merchant| merchant.name == input}
+  end
 
 end
