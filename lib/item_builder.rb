@@ -1,6 +1,6 @@
 class ItemBuilder
 
-  def self.load_customers(filename="./data/items.csv")
+  def self.load_items(filename="./data/items.csv")
     item_file = CSV.open(filename, headers: true)
     parse_items(item_file)
   end

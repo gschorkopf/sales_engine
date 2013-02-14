@@ -5,7 +5,7 @@ class MerchantBuilder
     parse_merchants(merchant_file)
   end
 
-  def self.parse_merchant(merchant_file)
+  def self.parse_merchants(merchant_file)
     merchant_totals = []
     merchant_file.collect do |merchant|
       merchant_totals << Merchant.new(merchant)

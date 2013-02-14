@@ -1,9 +1,9 @@
 class Merchant
-  attr_reader :first_name
+  attr_reader :id, :name, :created_at, :updated_at
 
   def initialize(hash)
-    @merch_id = hash['merch_id']
-    @store_name = hash['store_name']
+    @id = hash['id']
+    @name = hash['name']
     @created_at = hash['created_at']
     @updated_at = hash['updated_at']
   end
@@ -16,4 +16,5 @@ class Merchant
   #   store_names_found = @merchant_totals.find_all {|merchant| merchant.store_name == input}
   #   return store_names_found
   # end
+
 end

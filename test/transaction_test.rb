@@ -7,7 +7,7 @@ class TransactionTest < MiniTest::Unit::TestCase
   end
 
   def test_it_exists
-    trans = Transaction.new('sample_hash')
+    transaction = Transaction.new('sample_hash')
     assert_kind_of Transaction, transaction
   end
 

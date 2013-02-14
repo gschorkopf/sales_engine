@@ -1,12 +1,12 @@
 class Item
-  attr_reader :first_name
+  attr_reader :id, :name, :description, :unit_price, :merchant_id, :created_at, :updated_at
 
   def initialize(hash)
     @id = hash['id']
-    @price = hash['price']
-    @description = description['description']
-    @item_name = item_name['item_name']
-    @merchant_id = merchant_id['merchant_id']
+    @name = hash['name']
+    @description = hash['description']
+    @unit_price = hash['unit_price']
+    @merchant_id = hash['merchant_id']
     @created_at = hash['created_at']
     @updated_at = hash['updated_at']
   end
@@ -15,8 +15,9 @@ class Item
     @item_totals = array
   end
 
-  def self.find_associated_invoice(input)
-    # invoices_found = @item_totals.find_associated_invoice {|invoice| invoice.item_invoice_id == input}
-    return invoices_found
-  end
+  # def self.find_associated_invoice(input)
+  #   invoices_found = @item_totals.find_associated_invoice {|invoice| invoice.item_invoice_id == input}
+  #   return invoices_found
+  # end
+
 end
