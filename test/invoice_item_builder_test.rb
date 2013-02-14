@@ -3,7 +3,7 @@ require './test/support'
 class InvoiceItemBuilderTest < MiniTest::Unit::TestCase
   
   def setup
-    @output = InvoiceItemBuilder.load_invoice_items("./sample/samp_invoice_items.csv")
+    @output = InvoiceItemBuilder.from_csv("./sample/samp_invoice_items.csv")
   end
 
   def test_it_exists
