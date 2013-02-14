@@ -13,6 +13,10 @@ class Customer
     @customer_totals = array
   end
 
+  def self.random
+    @customer_totals.sample
+  end
+
   def self.find_by_id(input)
     @customer_totals.find {|customer| customer.id == input.to_i}
   end

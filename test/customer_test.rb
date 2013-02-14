@@ -3,12 +3,19 @@ require './test/support'
 class CustomerTest < MiniTest::Unit::TestCase
   
   def setup
-    CustomerBuilder.from_csv("./sample/samp_customers.csv")
+    @output = CustomerBuilder.from_csv("./sample/samp_customers.csv")
   end
 
   def test_it_exists
     customer = Customer.new('sample_hash')
     assert_kind_of Customer, customer
+  end
+
+  def test_random_returns_random_instance
+    customer1 = Customer.random
+    @output.delete(customer1)
+    customer2 = Customer.random
+    refute_equal customer1, customer2
   end
 
   def test_find_by_id_finds_single_instance_of_match
