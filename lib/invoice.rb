@@ -31,7 +31,7 @@ class Invoice
   end
 
   def self.find_by_status(input)
-    @invoice_totals.find {|invoice| invoice.status == input}
+    @invoice_totals.find {|invoice| invoice.status == input.downcase}
   end
 
   def self.find_all_by_id(input)
@@ -47,7 +47,7 @@ class Invoice
   end
 
   def self.find_all_by_status(input)
-    @invoice_totals.find_all {|invoice| invoice.status == input}
+    @invoice_totals.find_all {|invoice| invoice.status == input.downcase}
   end
 
 end

@@ -38,6 +38,11 @@ class InvoiceTest < MiniTest::Unit::TestCase
     assert_equal 'shipped', invoice.status
   end
 
+  def test_find_by_status_with_caps_parameter_still_finds_single_instance_of_match
+    invoice = Invoice.find_by_status('sHiPpEd')
+    assert_equal 'shipped', invoice.status
+  end
+
   def test_find_all_id_finds_all_invoices_by_id
     invoice = Invoice.find_all_by_id(2)
     assert_equal 1, invoice.length

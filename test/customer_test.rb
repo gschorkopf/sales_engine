@@ -28,6 +28,11 @@ class CustomerTest < MiniTest::Unit::TestCase
     assert_equal "Leanne", customer.first_name
   end
 
+  def test_find_by_first_name_with_caps_still_finds_single_instance_match
+    customer = Customer.find_by_first_name("LeAnNe")    
+    assert_equal "Leanne", customer.first_name
+  end
+
   def test_find_by_last_name_finds_single_instance_of_match
     customer = Customer.find_by_last_name("Nader")    
     assert_equal "Nader", customer.last_name
