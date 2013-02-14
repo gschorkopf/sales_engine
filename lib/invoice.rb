@@ -14,8 +14,40 @@ class Invoice
     @invoice_totals = array
   end
 
+  def self.random
+    @invoice_totals.sample
+  end
+
+  def self.find_by_id(input)
+    @invoice_totals.find {|invoice| invoice.id == input.to_i}
+  end
+
+  def self.find_by_customer_id(input)
+    @invoice_totals.find {|invoice| invoice.customer_id == input.to_i}
+  end
+
+  def self.find_by_merchant_id(input)
+    @invoice_totals.find {|invoice| invoice.merchant_id == input.to_i}
+  end
+
+  def self.find_by_status(input)
+    @invoice_totals.find {|invoice| invoice.status == input}
+  end
+
+  def self.find_all_by_id(input)
+    @invoice_totals.find_all {|invoice| invoice.id == input.to_i}
+  end
+
   def self.find_all_by_customer_id(input)
     @invoice_totals.find_all {|invoice| invoice.customer_id == input.to_i}
+  end
+
+  def self.find_all_by_merchant_id(input)
+    @invoice_totals.find_all {|invoice| invoice.merchant_id == input.to_i}
+  end
+
+  def self.find_all_by_status(input)
+    @invoice_totals.find_all {|invoice| invoice.status == input}
   end
 
 end
