@@ -13,7 +13,7 @@ class CustomerTest < MiniTest::Unit::TestCase
 
   def test_find_by_first_name_finds_all_customers_by_matching_name
     customer = Customer.find_all_by_first_name("Leanne")
-    assert_operator 2, :<=, customer.length
+    assert_operator 2, :==, customer.length
   end
 
 
