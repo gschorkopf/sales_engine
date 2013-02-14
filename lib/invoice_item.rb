@@ -15,48 +15,4 @@ class InvoiceItem
     @ii_totals = array
   end
 
-  def self.random
-    @ii_totals.sample
-  end
-
-  def self.find_by_id(input)
-    @ii_totals.find {|invoice_item| invoice_item.id == input.to_i}
-  end
-
-  def self.find_by_item_id(input)
-    @ii_totals.find {|invoice_item| invoice_item.item_id == input.to_i}
-  end
-
-  def self.find_by_invoice_id(input)
-    @ii_totals.find {|invoice_item| invoice_item.invoice_id == input.to_i}
-  end
-
-  def self.find_by_quantity(input)
-    @ii_totals.find {|invoice_item| invoice_item.quantity == input.to_i}
-  end
-
-  def self.find_by_unit_price(input)
-    @ii_totals.find {|invoice_item| invoice_item.unit_price == input.to_i}
-  end
-
-  def self.find_all_by_id(input)
-    @ii_totals.find_all {|invoice_item| invoice_item.id == input.to_i}
-  end
-
-  def self.find_all_by_item_id(input)
-    @ii_totals.find_all {|invoice_item| invoice_item.item_id == input.to_i}
-  end
-
-  def self.find_all_by_invoice_id(input)
-    @ii_totals.find_all {|invoice_item| invoice_item.invoice_id == input.to_i}
-  end
-
-  def self.find_all_by_quantity(input)
-    @ii_totals.find_all {|invoice_item| invoice_item.quantity == input.to_i}
-  end
-
-  def self.find_all_by_unit_price(input)
-    @ii_totals.find_all {|invoice_item| invoice_item.unit_price == input.to_i}
-  end
-
 end
