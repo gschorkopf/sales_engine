@@ -1,17 +1,14 @@
 class ItemBuilder
 
-  def self.load_items(filename="./data/items.csv")
-    item_file = CSV.open(filename, headers: true)
-    parse_items(item_file)
+  def self.from_csv(filename="./data/items.csv")
+    parse CSV.open(filename, headers: true)
   end
 
-  def self.parse_items(item_file)
-    item_totals = []
-    item_file.collect do |item|
-      item_totals << Item.new(item)
+  def self.parse(item_file)
+    items = item_file.collect do |item|
+      Item.new(item)
     end
-    Item.store_array(item_totals)
-    return item_totals
+    Item.store(items)
   end
 
 end
