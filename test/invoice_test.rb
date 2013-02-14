@@ -3,7 +3,7 @@ require './test/support'
 class InvoiceTest < MiniTest::Unit::TestCase
   
   def setup
-    InvoiceBuilder.load_invoices("./sample/samp_invoices.csv")
+    InvoiceBuilder.from_csv("./sample/samp_invoices.csv")
   end
 
   def test_it_exists
@@ -12,7 +12,12 @@ class InvoiceTest < MiniTest::Unit::TestCase
   end
 
   def test_find_all_by_customer_id_finds_all_invoices_by_customer_id
-    invoice = Invoice.find_all_by_customer_id("1")
+    invoice = Invoice.find_all_by_customer_id(1)
+    assert_operator 5, :==, invoice.length
+  end
+
+  def test_find_all_by_customer_id_finds_all_invoices_by_customer_id_string
+    invoice = Invoice.find_all_by_customer_id('1')
     assert_operator 5, :==, invoice.length
   end
 

@@ -3,7 +3,7 @@ require './test/support'
 class CustomerTest < MiniTest::Unit::TestCase
   
   def setup
-    CustomerBuilder.load_customers("./sample/samp_customers.csv")
+    CustomerBuilder.from_csv("./sample/samp_customers.csv")
   end
 
   def test_it_exists
