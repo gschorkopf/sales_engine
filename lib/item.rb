@@ -11,13 +11,54 @@ class Item
     @updated_at = hash['updated_at']
   end
 
-  def self.store_array(array)
+  def self.store(array)
     @item_totals = array
   end
 
-  # def self.find_associated_invoice(input)
-  #   invoices_found = @item_totals.find_associated_invoice {|invoice| invoice.item_invoice_id == input}
-  #   return invoices_found
-  # end
+  def self.find_by_id(input)
+    @item_totals.find {|item| item.id == input.to_i}
+  end
 
+  def self.find_all_by_id(input)
+    @item_totals.find_all {|item| item.id == input.to_i}
+  end
+
+  def self.find_by_name(input) 
+    @item_totals.find_by_name {|item| item.name == input}
+  end
+
+  def self.find_all_by_name(input)
+    @item_totals.find_all_by_name {|item| item.name == input}
+  end
+
+  def self.find_by_description(input)
+    @item_totals.find_by_description {|item| item.description == input}
+  end
+
+  def self.find_all_by_description(input)
+    @item_totals.find_all_by_description {|item| item.description == input}
+  end
+
+  def self.find_by_unit_price(input) 
+    @item_totals.find_by_unit_price {|item| item.unit_price == input}
+  end
+
+  def self.find_all_by_unit_price(input)
+    @item_totals.find_all_by_unit_price {|item| item.unit_price == input}
+  end  
+
+  def self.find_by_merchant_id(input) 
+    @item_totals.find_by_merchant_id {|item| item.merchant_id == input}
+  end
+
+  def self.find_all_by_merchant_id(input)
+    @item_totals.find_all_by_merchant_id {|item| item.merchant_id == input}
+  end
 end
+
+
+
+
+
+
+
