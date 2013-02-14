@@ -17,6 +17,14 @@ class Customer
     @customer_totals.find {|customer| customer.id == input.to_i}
   end
 
+   def self.find_by_first_name(input)
+    @customer_totals.find {|customer| customer.first_name == input}
+  end
+
+  def self.find_by_last_name(input)
+    @customer_totals.find {|customer| customer.last_name == input}
+  end
+
   def self.find_all_by_id(input)
     @customer_totals.find_all {|customer| customer.id == input.to_i}
   end
@@ -30,13 +38,5 @@ class Customer
     last_names_found = @customer_totals.find_all {|customer| customer.last_name == input}
     return last_names_found
   end
-
-  # def self.find_all_by_created_at(input)
-  #   
-  # end
-
-  # def self.find_all_by_updated_at(input)
-  #   
-  # end
 
 end

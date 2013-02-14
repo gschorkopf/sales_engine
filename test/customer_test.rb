@@ -11,9 +11,19 @@ class CustomerTest < MiniTest::Unit::TestCase
     assert_kind_of Customer, customer
   end
 
-  def test_find_by_id_finds_single_instance_of_matching_id
+  def test_find_by_id_finds_single_instance_of_match
     customer = Customer.find_by_id(3)    
     assert_equal 3, customer.id
+  end
+
+  def test_find_by_first_name_finds_single_instance_match
+    customer = Customer.find_by_first_name("Leanne")    
+    assert_equal "Leanne", customer.first_name
+  end
+
+  def test_find_by_last_name_finds_single_instance_of_match
+    customer = Customer.find_by_last_name("Nader")    
+    assert_equal "Nader", customer.last_name
   end
 
   def test_find_all_by_id_finds_all_customers_by_matching_id
