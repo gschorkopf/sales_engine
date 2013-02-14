@@ -11,7 +11,7 @@ class InvoiceTest < MiniTest::Unit::TestCase
     assert_kind_of Invoice, invoice
   end
 
-  def test_find_by_customer_id_finds_all_invoices_by_customer_id
+  def test_find_all_by_customer_id_finds_all_invoices_by_customer_id
     invoice = Invoice.find_all_by_customer_id("1")
     assert_operator 5, :==, invoice.length
   end

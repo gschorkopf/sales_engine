@@ -7,7 +7,7 @@ class InvoiceBuilder
 
   def self.parse_invoices(invoice_file)
     invoice_totals = []
-    invoice_file.each do |invoice|
+    invoice_file.collect do |invoice|
       invoice_totals << Invoice.new(invoice)
     end
     Invoice.store_array(invoice_totals)
