@@ -50,4 +50,12 @@ class Invoice
     @invoice_totals.find_all {|invoice| invoice.status == input.downcase}
   end
 
+  def transactions
+    # Need to see how Transactions Class looks
+  end
+
+  def invoice_items
+    #
+  end
+
 end

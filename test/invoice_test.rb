@@ -68,4 +68,14 @@ class InvoiceTest < MiniTest::Unit::TestCase
     assert_equal 5, invoice.length
   end
 
+  # Come back to this
+  def test_trans
+  end
+  def test_ii
+  end
+  def test_i
+  end
+  def test_cust
+  end
+
 end
