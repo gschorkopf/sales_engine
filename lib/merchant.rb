@@ -21,11 +21,11 @@ class Merchant
   end
 
   def self.find_by_name(input) 
-    @merchant_totals.find {|merchant| merchant.name == input}
+    @merchant_totals.find {|merchant| merchant.name.downcase == input.downcase}
   end
 
   def self.find_all_by_name(input)
-    @merchant_totals.find_all {|merchant| merchant.name == input}
+    @merchant_totals.find_all {|merchant| merchant.name.downcase == input.downcase}
   end
 
 end

@@ -24,11 +24,11 @@ class Item
   end
 
   def self.find_by_name(input) 
-    @item_totals.find {|item| item.name == input}
+    @item_totals.find {|item| item.name.downcase == input.downcase}
   end
 
   def self.find_all_by_name(input)
-    @item_totals.find_all {|item| item.name == input}
+    @item_totals.find_all {|item| item.name.downcase == input.downcase}
   end
 
   def self.find_by_description(input)
@@ -36,7 +36,7 @@ class Item
   end
 
   def self.find_all_by_description(input)
-    @item_totals.find_all{|item| item.description == input}
+    @item_totals.find_all{|item| item.description.downcase == input.downcase}
   end
 
   def self.find_by_unit_price(input) 

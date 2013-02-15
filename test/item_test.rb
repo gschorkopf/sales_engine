@@ -27,7 +27,7 @@ class ItemTest < MiniTest::Unit::TestCase
   end
 
   def test_find_by_name_finds_items_by_matching_name
-    item_names = Item.find_by_name("Item Qui Esse")
+    item_names = Item.find_by_name("item qui esse")
     assert_equal "Item Qui Esse", item_names.name
   end
 
