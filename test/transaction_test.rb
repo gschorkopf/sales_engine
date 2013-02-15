@@ -3,7 +3,7 @@ require './test/support'
 class TransactionTest < MiniTest::Unit::TestCase
   
   def setup
-    TransactionBuilder.load_transactions("./sample/samp_transactions.csv")
+    TransactionBuilder.from_csv("./sample/samp_transactions.csv")
   end
 
   def test_it_exists
