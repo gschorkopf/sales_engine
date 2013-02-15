@@ -34,13 +34,15 @@ class Customer
   end
 
   def self.find_all_by_first_name(input)
-    first_names_found = @customer_totals.find_all {|customer| customer.first_name.downcase == input.downcase}
-    return first_names_found
+    @customer_totals.find_all {|customer| customer.first_name.downcase == input.downcase}
   end
 
   def self.find_all_by_last_name(input)
-    last_names_found = @customer_totals.find_all {|customer| customer.last_name.downcase == input.downcase}
-    return last_names_found
+    @customer_totals.find_all {|customer| customer.last_name.downcase == input.downcase}
+  end
+
+  def invoices
+    Invoice.find_all_by_customer_id(id)
   end
 
 end
