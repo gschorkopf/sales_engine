@@ -15,4 +15,13 @@ class InvoiceItem
     @ii_totals = array
   end
 
+  def invoice
+    Invoice.find_by_id(invoice_id)
+  end
+
+  def item
+    Item.find_by_id(item_id)
+    # Waiting on Item Class
+  end
+
 end
