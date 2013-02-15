@@ -13,7 +13,7 @@ class ItemTest < MiniTest::Unit::TestCase
 
   def test_find_by_id_finds_single_instance_of_matching_id
     item = Item.find_by_id(4)
-    assert_equal 4, item.find
+    assert_equal 4, item.id
   end
 
   def test_find_all_by_id_finds_all_items_by_matching_id
@@ -36,34 +36,34 @@ class ItemTest < MiniTest::Unit::TestCase
     assert_equal 1, item_names.length
   end
 
-  def test_find_by_name_finds_items_by_matching_description
-    item_descriptions = Item.find_by_description("Nihil AUtem sit")
-    assert_equal "Nihil autem sit", item_descriptions.description
+  def test_find_by_description_finds_items_by_matching_description
+    item = Item.find_by_description("Nihil aUTem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.")
+    assert_equal "Item Qui Esse", item.name
   end
 
   def test_find_all_by_description_finds_all_items_by_matching_description
-    item_descriptions = Item.find_all_by_description("Nihil AUtem sit")
+    item_descriptions = Item.find_all_by_description("Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.")
     assert_equal 1, item_descriptions.length
   end 
 
-  def test_find_by_name_finds_items_by_matching_unit_price
-    item_unit_prices = Item.find_by_unit_price("75107")
-    assert_equal 75107, item_unit_prices.length
+  def test_find_by_unit_price_finds_items_by_matching_unit_price
+    item = Item.find_by_unit_price(75107)
+    assert_equal 75107, item.unit_price
   end
 
   def test_find_all_by_unit_price_finds_all_items_by_matching_unit_price
-    item_unit_prices = Item.find_all_by_unit_price
+    item_unit_prices = Item.find_all_by_unit_price(75107)
     assert_equal 1, item_unit_prices.length
   end
 
-  def test_find_by_name_finds_items_by_matching_merchant_id
-    item_merchant_ids = Item.find_by_merchant_id(3)
-    assert_equal 3, item_merchant_ids.length
+  def test_find_by_merchant_id_finds_items_by_matching_merchant_id
+    item_merchant_ids = Item.find_by_merchant_id(1)
+    assert_equal 1, item_merchant_ids.merchant_id
   end
 
   def test_find_all_by_merchant_id_finds_all_items_by_matching_merchant_id
-    item_merchant_ids = Item.find_all_by_merchant_id(4)
-    assert_equal 1, item_merchant_ids.length
+    item_merchant_ids = Item.find_all_by_merchant_id(1)
+    assert_equal 4, item_merchant_ids.length
   end
 
 end

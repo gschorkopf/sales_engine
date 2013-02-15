@@ -5,8 +5,8 @@ class Item
     @id = hash['id'].to_i
     @name = hash['name']
     @description = hash['description']
-    @unit_price = hash['unit_price']
-    @merchant_id = hash['merchant_id']
+    @unit_price = hash['unit_price'].to_i
+    @merchant_id = hash['merchant_id'].to_i
     @created_at = hash['created_at']
     @updated_at = hash['updated_at']
   end
@@ -32,7 +32,7 @@ class Item
   end
 
   def self.find_by_description(input)
-    @item_totals.find {|item| item.description == input}
+    @item_totals.find {|item| item.description.downcase == input.downcase}
   end
 
   def self.find_all_by_description(input)
@@ -40,19 +40,19 @@ class Item
   end
 
   def self.find_by_unit_price(input) 
-    @item_totals.find {|item| item.unit_price == input}
+    @item_totals.find {|item| item.unit_price == input.to_i}
   end
 
   def self.find_all_by_unit_price(input)
-    @item_totals.find_all {|item| item.unit_price == input}
+    @item_totals.find_all {|item| item.unit_price == input.to_i}
   end  
 
   def self.find_by_merchant_id(input) 
-    @item_totals.find {|item| item.merchant_id == input}
+    @item_totals.find {|item| item.merchant_id == input.to_i}
   end
 
   def self.find_all_by_merchant_id(input)
-    @item_totals.find_all {|item| item.merchant_id == input}
+    @item_totals.find_all {|item| item.merchant_id == input.to_i}
   end
 end
 

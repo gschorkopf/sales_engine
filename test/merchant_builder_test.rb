@@ -11,8 +11,8 @@ class MerchantBuilderTest < MiniTest::Unit::TestCase
     assert_kind_of MerchantBuilder, merchant_builder
   end
 
-  # def test_it_builds_merchants_from_a_csv
-  #   assert_operator 5, :<=, @output.size
-  # end
+  def test_it_builds_merchants_from_a_csv
+    assert_equal 4, @output.size
+  end
 
 end

@@ -27,8 +27,8 @@ class MerchantTest < MiniTest::Unit::TestCase
   end
 
   def test_find_by_name_finds_merchants_by_matching_name
-    merchant_names = Merchant.find_by_name("Willms and Sons")
-    assert_equal "Willms and Sons", merchant_names.find_by_name #could this be 'merchant_names.find'?
+    merchant = Merchant.find_by_name("Willms and Sons")
+    assert_equal "Willms and Sons", merchant.name #could this be 'merchant_names.find'?
   end
 
   def test_find_all_by_name_finds_all_merchants_by_matching_name
