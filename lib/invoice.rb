@@ -51,11 +51,19 @@ class Invoice
   end
 
   def transactions
-    # Need to see how Transactions Class looks
+    Transaction.find_all_by_invoice_id(id)
   end
 
   def invoice_items
+    InvoiceItem.find_all_by_
+  end
+
+  def items
     #
+  end
+
+  def customer
+    Customer.find_by_id(customer_id)
   end
 
 end

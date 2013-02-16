@@ -15,6 +15,8 @@ class InvoiceItem
     @ii_totals = array
   end
 
+  def self.find_all_by_invoice_id
+
   def invoice
     Invoice.find_by_id(invoice_id)
   end

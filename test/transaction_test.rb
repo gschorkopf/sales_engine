@@ -11,9 +11,9 @@ class TransactionTest < MiniTest::Unit::TestCase
     assert_kind_of Transaction, transaction
   end
 
-  # def test_find_by_first_name_finds_all_transactions_by_matching_name
-  #   transaction = Transaction.find_all_by_first_name("Leanne")
-  #   assert_operator 2, :==, transaction.length
-  # end
+  def test_find_all_by_invoice_id_finds_all_invoices_by_matching_id
+    transactions = Transaction.find_all_by_invoice_id(4)
+    assert_equal 1, transactions.length
+  end
 
 end
