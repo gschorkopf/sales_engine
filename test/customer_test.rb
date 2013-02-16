@@ -4,7 +4,7 @@ class CustomerTest < MiniTest::Unit::TestCase
   
   def setup
     @output = CustomerBuilder.from_csv("./sample/samp_customers.csv")
-    InvoiceBuilder.from_csv("./sample/samp_invoices.csv") # need to run to have invoice object built
+    InvoiceBuilder.from_csv("./sample/samp_invoices.csv")
   end
 
   def test_it_exists
@@ -60,8 +60,8 @@ class CustomerTest < MiniTest::Unit::TestCase
   end
 
   def test_invoices_method_returns_instance_of_invoice
-    first_customer = @output.first #Joey object returned
-    assert_equal 5, first_customer.invoices.length #how many invoices does joey have?
+    first_customer = @output.first
+    assert_equal 5, first_customer.invoices.length
   end
 
 end
