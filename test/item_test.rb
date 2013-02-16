@@ -3,7 +3,8 @@ require './test/support'
 class ItemTest < MiniTest::Unit::TestCase
   
   def setup
-    ItemBuilder.from_csv("./sample/samp_items.csv")
+    MerchantBuilder.from_csv("./sample/samp_merchants.csv")
+    @output = ItemBuilder.from_csv("./sample/samp_items.csv")
   end
 
   def test_it_exists
@@ -64,6 +65,16 @@ class ItemTest < MiniTest::Unit::TestCase
   def test_find_all_by_merchant_id_finds_all_items_by_matching_merchant_id
     item_merchant_ids = Item.find_all_by_merchant_id(1)
     assert_equal 4, item_merchant_ids.length
+  end
+
+  def test_merchant_instance_method_finds_merchant_associated_with_item
+    first_item = @output.first
+    assert_equal "Schroeder-Jerde", first_item.merchant.name
+  end
+
+  def test_invoice_items_method_finds_collection_of_invoice_items_associated_with_item
+    collected_items = @output
+    assert_equal , collected_items.invoice_items.
   end
 
 end

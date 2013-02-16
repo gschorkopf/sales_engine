@@ -15,6 +15,11 @@ class Item
     @item_totals = array
   end
 
+# example of random method
+  # def self.random
+  #   @item_totals.sample
+  # end
+
   def self.find_by_id(input)
     @item_totals.find {|item| item.id == input.to_i}
   end
@@ -54,6 +59,33 @@ class Item
   def self.find_all_by_merchant_id(input)
     @item_totals.find_all {|item| item.merchant_id == input.to_i}
   end
+
+# example of instance method
+  # def invoice
+  #   id = InvoiceItem.invoice_id
+  #   Invoice.find_by_id(id)
+  # end
+
+# refactored example of instance method
+#   def invoice
+#     Invoice.find_by_id(invoice_id)
+#   end
+
+  def merchant
+    id = self.merchant_id
+    Merchant.find_by_id(id)
+  end
+
+# refactored method above
+  # def merchant
+  #   Merchant.find_by_id(id)
+  # end
+
+  # def invoice_items
+  #   collection = self.id
+  #   InvoiceItem.find_by
+  # end
+
 end
 
 
