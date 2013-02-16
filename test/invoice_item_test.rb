@@ -3,6 +3,8 @@ require './test/support'
 class InvoiceItemTest < MiniTest::Unit::TestCase
 
   def setup
+    ItemBuilder.from_csv("./sample/samp_items.csv")
+    InvoiceBuilder.from_csv("./sample/samp_invoices.csv")
     @output = InvoiceItemBuilder.from_csv("./sample/samp_invoice_items.csv")
   end
   
@@ -17,8 +19,7 @@ class InvoiceItemTest < MiniTest::Unit::TestCase
   end
 
   def test_item_method_on_ii_returns_instance_of_item
-    # first_ii = @output.first
-    # assert_equal (the name of item 539 does not exist), first_ii.item.name
-    # # Test will not work without Item Class
+    first_ii = @output.first
+    assert_equal "Item Sunt Saepe", first_ii.item.name
   end
 end
