@@ -72,10 +72,10 @@ class ItemTest < MiniTest::Unit::TestCase
     assert_equal "Schroeder-Jerde", first_item.merchant.name
   end
 
-  def test_invoice_items_method_finds_collection_of_invoice_items_associated_with_item
-    collected_items = @output
-    assert_equal , collected_items.invoice_items.
-  end
+  # def test_invoice_items_method_finds_collection_of_invoice_items_associated_with_item
+  #   collected_items = @output
+  #   assert_equal , collected_items.invoice_items.
+  # end
 
 end
 
