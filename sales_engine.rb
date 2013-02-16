@@ -1,4 +1,5 @@
 require 'csv'
+require 'bigdecimal'
 require './lib/merchant'
 require './lib/invoice'
 require './lib/item'
