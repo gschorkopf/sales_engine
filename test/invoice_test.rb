@@ -7,6 +7,7 @@ class InvoiceTest < MiniTest::Unit::TestCase
     CustomerBuilder.from_csv("./sample/samp_customers.csv")
     TransactionBuilder.from_csv("./sample/samp_transactions.csv")
     InvoiceItemBuilder.from_csv("./sample/samp_invoice_items.csv")
+    ItemBuilder.from_csv("./sample/samp_items.csv")
   end
 
   def test_it_exists
@@ -83,7 +84,7 @@ class InvoiceTest < MiniTest::Unit::TestCase
 
   def test_items_method_on_invoice_returns_collection
     first_invoice = @output.first
-    # assert_equal XXX, first_invoice.items.length
+    assert_equal 5, first_invoice.items.length
   end
 
   def test_customer_method_on_invoice_returns_instance
