@@ -60,7 +60,8 @@ class Invoice
 
   def items
     invoice_item_collection = InvoiceItem.find_all_by_invoice_id(id)
-    Item.find_all_by_id(invoice_item_collection.item_id)
+    items_collection = invoice_item_collection.collect {|invoice_item| invoice_item.item_id == Item.find_by_id(invoice_item.item_id)}
+    ### BAH IS THIS RIGHT.
   end
 
   def customer
