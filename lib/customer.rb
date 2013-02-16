@@ -13,8 +13,20 @@ class Customer
     @customer_totals = array
   end
 
+  def self.random
+    @customer_totals.sample
+  end
+
   def self.find_by_id(input)
     @customer_totals.find {|customer| customer.id == input.to_i}
+  end
+
+   def self.find_by_first_name(input)
+    @customer_totals.find {|customer| customer.first_name.downcase == input.downcase}
+  end
+
+  def self.find_by_last_name(input)
+    @customer_totals.find {|customer| customer.last_name.downcase == input.downcase}
   end
 
   def self.find_all_by_id(input)
@@ -22,21 +34,15 @@ class Customer
   end
 
   def self.find_all_by_first_name(input)
-    first_names_found = @customer_totals.find_all {|customer| customer.first_name == input}
-    return first_names_found
+    @customer_totals.find_all {|customer| customer.first_name.downcase == input.downcase}
   end
 
   def self.find_all_by_last_name(input)
-    last_names_found = @customer_totals.find_all {|customer| customer.last_name == input}
-    return last_names_found
+    @customer_totals.find_all {|customer| customer.last_name.downcase == input.downcase}
   end
 
-  # def self.find_all_by_created_at(input)
-  #   
-  # end
-
-  # def self.find_all_by_updated_at(input)
-  #   
-  # end
+  def invoices
+    Invoice.find_all_by_customer_id(id)
+  end
 
 end

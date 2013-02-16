@@ -9,12 +9,12 @@ require './lib/transaction'
 class SalesEngine
 
   def startup
-    CustomerBuilder.load_customers
-    InvoiceBuilder.load_invoices
-    InvoiceItemBuilder.load_invoice_items
-    ItemBuilder.load_items
-    MerchantBuilder.load_merchants
-    TransactionBuilder.load_transactions
+    CustomerBuilder.from_csv
+    InvoiceBuilder.from_csv
+    InvoiceItemBuilder.from_csv
+    ItemBuilder.from_csv
+    MerchantBuilder.from_csv
+    TransactionBuilder.from_csv
   end
 
 end
