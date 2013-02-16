@@ -13,6 +13,11 @@ class InvoiceItemTest < MiniTest::Unit::TestCase
     assert_kind_of InvoiceItem, ii
   end
 
+  def test_find_all_by_invoice_id_returns_collect_of_invoice_items
+    ii = InvoiceItem.find_all_by_invoice_id(1)
+    assert_equal 5, ii.length
+  end
+
   def test_invoice_method_on_ii_returns_instance_of_invoice
     first_ii = @output.first
     assert_equal 26, first_ii.invoice.merchant_id

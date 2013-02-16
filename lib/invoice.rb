@@ -55,11 +55,12 @@ class Invoice
   end
 
   def invoice_items
-    InvoiceItem.find_all_by_
+    InvoiceItem.find_all_by_invoice_id(id)
   end
 
   def items
-    #
+    invoice_item_collection = InvoiceItem.find_all_by_invoice_id(id)
+    Item.find_all_by_id(invoice_item_collection.item_id)
   end
 
   def customer

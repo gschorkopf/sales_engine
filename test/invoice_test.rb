@@ -81,7 +81,9 @@ class InvoiceTest < MiniTest::Unit::TestCase
     assert_equal 5, first_invoice.invoice_items.length
   end
 
-  def test_i
+  def test_items_method_on_invoice_returns_collection
+    first_invoice = @output.first
+    # assert_equal XXX, first_invoice.items.length
   end
 
   def test_customer_method_on_invoice_returns_instance
