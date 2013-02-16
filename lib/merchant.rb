@@ -28,4 +28,16 @@ class Merchant
     @merchant_totals.find_all {|merchant| merchant.name.downcase == input.downcase}
   end
 
+  def items
+    Item.find_all_by_merchant_id(id)
+  end
+
+  def invoices
+    Invoice.find_all_by_merchant_id(id)
+  end
+
+  def self.most_items(number_of_merchants)
+    ###
+  end
+
 end
