@@ -15,8 +15,20 @@ class Transaction
     @transaction_totals = array
   end
 
+  def self.random
+    @transaction_totals.sample
+  end
+
+  def self.find_by_id(input)
+    @transaction_totals.find {|transaction| transaction.id == input.to_i}
+  end
+
   def self.find_all_by_invoice_id(input)
     @transaction_totals.find_all {|transaction| transaction.invoice_id == input.to_i}
+  end
+
+  def invoice
+    Invoice.find_by_id(invoice_id)  
   end
 
 end

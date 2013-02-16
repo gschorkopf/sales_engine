@@ -3,6 +3,7 @@ require './test/support'
 class ItemTest < MiniTest::Unit::TestCase
   
   def setup
+    InvoiceItemBuilder.from_csv("./sample/samp_invoice_items.csv")
     MerchantBuilder.from_csv("./sample/samp_merchants.csv")
     @output = ItemBuilder.from_csv("./sample/samp_items.csv")
   end
@@ -72,10 +73,10 @@ class ItemTest < MiniTest::Unit::TestCase
     assert_equal "Schroeder-Jerde", first_item.merchant.name
   end
 
-  # def test_invoice_items_method_finds_collection_of_invoice_items_associated_with_item
-  #   collected_items = @output
-  #   assert_equal , collected_items.invoice_items.
-  # end
+  def test_invoice_items_method_finds_collection_of_invoice_items_associated_with_item
+    item = Item.find_by_id(539)
+    assert_equal 2, item.invoice_items.length
+  end
 
 end
 

@@ -12,6 +12,10 @@ class Merchant
     @merchant_totals = array
   end
 
+  def self.random
+    @merchant_totals.sample
+  end
+
   def self.find_by_id(input)
     @merchant_totals.find {|merchant| merchant.id == input.to_i}
   end

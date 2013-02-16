@@ -15,10 +15,9 @@ class Item
     @item_totals = array
   end
 
-# example of random method
-  # def self.random
-  #   @item_totals.sample
-  # end
+  def self.random
+    @item_totals.sample
+  end
 
   def self.find_by_id(input)
     @item_totals.find {|item| item.id == input.to_i}
@@ -85,6 +84,10 @@ class Item
   #   collection = self.id
   #   InvoiceItem.find_by
   # end
+
+  def invoice_items
+    InvoiceItem.find_all_by_item_id(id)
+  end
 
 end
 
