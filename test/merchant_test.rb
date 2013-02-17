@@ -47,10 +47,15 @@ class MerchantTest < MiniTest::Unit::TestCase
     assert_equal 0, first_merchant.invoices.length
   end
 
-  def test_most_items_x_returns_merchant_list_of_x_numbers_sorted_by_items_sold
-    # Merchant.most_items(3)
+  def test_most_revenue_x_returns_merchant_list_of_x_numbers_sorted_by_total_revenue
+    most_revenue = Merchant.most_revenue(2)
+    top_merchant = most_revenue.first
+    assert_equal 2, most_revenue.length
+    assert_equal "Schroeder-Jerde", top_merchant.name
+  end
 
-    # assert_equal , 
+  def test_most_items_x_returns_merchant_list_of_x_numbers_sorted_by_items_sold
+
   end
 
 end

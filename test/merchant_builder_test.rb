@@ -12,7 +12,7 @@ class MerchantBuilderTest < MiniTest::Unit::TestCase
   end
 
   def test_it_builds_merchants_from_a_csv
-    assert_equal 4, @output.size
+    assert_equal 5, @output.size
   end
 
 end
