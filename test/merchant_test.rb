@@ -55,7 +55,10 @@ class MerchantTest < MiniTest::Unit::TestCase
   end
 
   def test_most_items_x_returns_merchant_list_of_x_numbers_sorted_by_items_sold
-
+    most_items = Merchant.most_items(2)
+    top_merchant = most_items.first
+    assert_equal 2, most_items.length
+    assert_equal "Schroeder-Jerde", top_merchant.name
   end
 
 end

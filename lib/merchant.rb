@@ -41,7 +41,18 @@ class Merchant
   end
 
   def self.most_items(number_of_merchants)
-    ###
+
+    invoice_items.inject(Hash.new(0)) do |total_items, invoice_item|
+
+      item = Item.find_by_id(invoice_item.item_id)
+
+      merchant = Merchant.find_by_id(item.merchant_id)
+
+      total_items[merchant] = total_items[merchant] + invoice_item.quantity
+      total_items
+    end
+    ... [0..number_of_merchants]
+
   end
 
 end
