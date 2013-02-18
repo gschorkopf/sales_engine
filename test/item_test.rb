@@ -78,11 +78,17 @@ class ItemTest < MiniTest::Unit::TestCase
     assert_equal 2, item.invoice_items.length
   end
 
+  def test_most_revenue_x_returns_item_list_of_x_numbers_sorted_by_total_revenue
+    most_revenue = Item.most_revenue(3)
+    assert_equal 3, most_revenue.length
+    assert_equal "Item Eius Et", most_revenue.first.name
+    assert_equal "Item Pariatur Quia", most_revenue.last.name
+  end
+
   def test_most_items_x_returns_item_list_of_x_numbers_sorted_by_items_sold
     most_items = Item.most_items(4)
-    top_item = most_items.first
     assert_equal 4, most_items.length
-    assert_equal "Item Quae Dolore", top_item.name
+    assert_equal "Item Quae Dolore", most_items.first.name
     assert_equal "Item Eius Et", most_items.last.name
   end
 
