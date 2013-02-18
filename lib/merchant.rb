@@ -77,8 +77,8 @@ class Merchant
     end
 
     output_list = []
-    sorted_array = Hash[merchant_quantity_hash.sort_by { |k,v| v }.reverse]
-    sorted_array.keys[0..number-1].each {|key| output_list << Merchant.find_by_id(key)}
+    sorted_array = Hash[merchant_quantity_hash.sort_by {|merchant_id, amount| amount}.reverse]
+    sorted_array.keys[0..number-1].each {|merchant_id| output_list << Merchant.find_by_id(merchant_id)}
 
     return output_list 
   end
