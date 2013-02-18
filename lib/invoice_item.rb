@@ -13,6 +13,7 @@ class InvoiceItem
 
   def self.store(array)
     @ii_totals = array
+    $invoice_items = array
   end
 
   def self.find_all_by_invoice_id(input)

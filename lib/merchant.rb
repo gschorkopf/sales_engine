@@ -40,19 +40,65 @@ class Merchant
     Invoice.find_all_by_merchant_id(id)
   end
 
-  def self.most_items(number_of_merchants)
+  # def self.most_revenue(number)
+  #   #Insert Ruby code HERRR
+  # end
 
-    invoice_items.inject(Hash.new(0)) do |total_items, invoice_item|
+  ##Start move to transaction file##
+  # def is_successful?
+  #   if self.result == 'success'
+  #     return true
+  #   else
+  #     return false
+  #   end
+  # end
 
-      item = Item.find_by_id(invoice_item.item_id)
+  # def self.all_successful
+  #   success_array = []
+  #   @transactions.select {|transaction| transaction.is_successful? == true}.collect |transaction| do 
+  #     success_array << transaction.invoice_id
+  #   end
+  #   success_array
+  # end
+  ##End move to transaction file##
 
-      merchant = Merchant.find_by_id(item.merchant_id)
-
-      total_items[merchant] = total_items[merchant] + invoice_item.quantity
-      total_items
+  def self.most_items(number)
+    invoice_item_amount_hash = Hash.new(0)
+    $invoice_items.each do |invoice_item|
+      amount = invoice_item.quantity
+      invoice_item_amount_hash[invoice_item.invoice_id] += amount
     end
-    ... [0..number_of_merchants]
 
+    merchant_quantity_hash = Hash.new(0)
+    invoice_item_amount_hash.each_pair do |inv_id, amount|
+      invoice_object = Invoice.find_by_id(inv_id)
+      merchant_object = Merchant.find_by_id(invoice_object.merchant_id)
+      merchant_quantity_hash[merchant_object.id] += amount 
+    end
+
+    output_list = []
+    sorted_array = Hash[merchant_quantity_hash.sort_by { |k,v| v }.reverse]
+    sorted_array.keys[0..number-1].each {|key| output_list << Merchant.find_by_id(key)}
+
+    return output_list 
   end
 
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -5,7 +5,7 @@ class Transaction
     @id = hash['id'].to_i
     @invoice_id = hash['invoice_id'].to_i
     @credit_card_number = hash['credit_card_number'].to_i
-    @credit_card_expiration_date = hash['credit_card_expiration_date'] #do we need .to_i on this?
+    @credit_card_expiration_date = hash['credit_card_expiration_date']
     @result = hash['result']
     @created_at = hash['created_at']
     @updated_at = hash['updated_at']
