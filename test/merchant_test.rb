@@ -31,7 +31,7 @@ class MerchantTest < MiniTest::Unit::TestCase
 
   def test_find_by_name_finds_merchants_by_matching_name
     merchant = Merchant.find_by_name("Willms and Sons")
-    assert_equal "Willms and Sons", merchant.name #could this be 'merchant_names.find'?
+    assert_equal "Willms and Sons", merchant.name
   end
 
   def test_find_all_by_name_finds_all_merchants_by_matching_name
@@ -49,18 +49,16 @@ class MerchantTest < MiniTest::Unit::TestCase
     assert_equal 0, first_merchant.invoices.length
   end
 
-  # def test_most_revenue_x_returns_merchant_list_of_x_numbers_sorted_by_total_revenue
-  #   # most_revenue = Merchant.most_revenue(2)
-  #   # top_merchant = most_revenue.first
-  #   # assert_equal 2, most_revenue.length
-  #   # assert_equal "Schroeder-Jerde", top_merchant.name
-  # end
+  def test_most_revenue_x_returns_merchant_list_of_x_numbers_sorted_by_total_revenue
+    most_revenue = Merchant.most_revenue(2)
+    assert_equal 2, most_revenue.length
+    assert_equal "Balistreri, Schaefer and Kshlerin", most_revenue.first.name
+  end
 
   def test_most_items_x_returns_merchant_list_of_x_numbers_sorted_by_items_sold
     most_items = Merchant.most_items(2)
-    top_merchant = most_items.first
     assert_equal 2, most_items.length
-    assert_equal "Balistreri, Schaefer and Kshlerin", top_merchant.name
+    assert_equal "Balistreri, Schaefer and Kshlerin", most_items.first.name
   end
 
 end
