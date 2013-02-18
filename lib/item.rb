@@ -89,6 +89,20 @@ class Item
     InvoiceItem.find_all_by_item_id(id)
   end
 
+  def self.most_items(number)
+    invoice_item_amount_hash = Hash.new(0)
+    $invoice_items.each do |invoice_item|
+      amount = invoice_item.quantity
+      invoice_item_amount_hash[invoice_item.item_id] += amount
+    end
+
+    output_list = []
+    sorted_array = Hash[invoice_item_amount_hash.sort_by {|item_id, amount| amount}.reverse]
+    sorted_array.keys[0..number-1].each {|item_id| output_list << Item.find_by_id(item_id)}
+
+    return output_list 
+  end
+
 end
 
 
