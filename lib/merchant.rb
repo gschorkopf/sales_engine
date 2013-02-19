@@ -40,27 +40,26 @@ class Merchant
     Invoice.find_all_by_merchant_id(id)
   end
 
-  # def self.most_revenue(number)
-  #   #Insert Ruby code HERRR
-  # end
+  def self.most_revenue(number)
+    invoice_item_price_hash = Hash.new(0)
+    $invoice_items.each do |invoice_item| 
+      revenue = invoice_item.unit_price * invoice_item.quantity
+      invoice_item_price_hash[invoice_item.invoice_id] += revenue
+    end
 
-  ##Start move to transaction file##
-  # def is_successful?
-  #   if self.result == 'success'
-  #     return true
-  #   else
-  #     return false
-  #   end
-  # end
+    merchant_revenue_hash = Hash.new(0)
+    invoice_item_price_hash.each_pair do |inv_id, revenue|
+      invoice_object = Invoice.find_by_id(inv_id)
+      merchant_object = Merchant.find_by_id(invoice_object.merchant_id)
+      merchant_revenue_hash[merchant_object.id] += revenue
+    end
 
-  # def self.all_successful
-  #   success_array = []
-  #   @transactions.select {|transaction| transaction.is_successful? == true}.collect |transaction| do 
-  #     success_array << transaction.invoice_id
-  #   end
-  #   success_array
-  # end
-  ##End move to transaction file##
+    output_list = []
+    sorted_array = Hash[merchant_revenue_hash.sort_by {|merchant_id, revenue| revenue}.reverse]
+    sorted_array.keys[0..number-1].each {|merchant_id| output_list << Merchant.find_by_id(merchant_id)}
+
+    return output_list 
+  end
 
   def self.most_items(number)
     invoice_item_amount_hash = Hash.new(0)

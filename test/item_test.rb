@@ -4,6 +4,7 @@ class ItemTest < MiniTest::Unit::TestCase
   
   def setup
     InvoiceItemBuilder.from_csv("./sample/samp_invoice_items.csv")
+    InvoiceBuilder.from_csv("./sample/samp_invoices.csv")
     MerchantBuilder.from_csv("./sample/samp_merchants.csv")
     @output = ItemBuilder.from_csv("./sample/samp_items.csv")
   end
@@ -92,5 +93,9 @@ class ItemTest < MiniTest::Unit::TestCase
     assert_equal "Item Eius Et", most_items.last.name
   end
 
+  def test_best_day_returns_date_with_most_sales_for_item_using_invoice_date
+    date = Date.parse "Sat, 25 Mar 2012"
+    assert_equal date, Item.find_by_id(539).best_day
+  end
 end
 
