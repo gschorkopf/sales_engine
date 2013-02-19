@@ -22,4 +22,15 @@ class TransactionTest < MiniTest::Unit::TestCase
     assert_equal 75, transaction.invoice.merchant_id
   end
 
+  def test_is_successful_when_status_is_success
+    transaction = Transaction.new({'result' => 'success'})
+    assert_equal 'success', transaction.result
+    assert transaction.success?
+  end
+
+  def test_is_not_successful_when_status_is_failed
+    transaction = Transaction.new({'result' => 'failed'})
+    refute transaction.success?
+  end
+
 end

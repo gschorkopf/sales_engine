@@ -112,7 +112,7 @@ class Item
     sorted_array = Hash[ii_hash.sort_by {|inv_id, amount| amount}.reverse]
     sorted_array.keys.each {|inv_id| output_list << Invoice.find_by_id(inv_id).created_at}
 
-    return Date.parse(output_list.first)
+    return output_list.first
   end
 
 end

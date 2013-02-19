@@ -92,4 +92,67 @@ class InvoiceTest < MiniTest::Unit::TestCase
     assert_equal "Joey", first_invoice.customer.first_name 
   end
 
+  def test_an_invoice_is_paid_when_it_has_a_successful_transaction
+    invoice = Invoice.new('id' => 1234)
+    transaction = Transaction.new('invoice_id' => 1234, 'result' => 'success')
+    invoice.transactions << transaction
+    assert invoice.paid?, 'invoice should be paid!'
+  end
+
+  def test_an_invoice_is_not_paid_when_it_has_no_transactions
+    invoice = Invoice.new('id' => 1234567890)
+    refute invoice.paid?, 'invoice should not be paid!'
+  end
+
+  def test_an_invoice_is_not_paid_when_it_has_only_a_failed_transaction
+    invoice = Invoice.new('id' => 1234)
+    transaction = Transaction.new('invoice_id' => 1234, 'result' => 'failed')
+    invoice.transactions << transaction
+    refute invoice.paid?, 'invoice should fail!'
+  end
+
+  def test_an_invoice_is_pending_when_it_is_not_paid
+    invoice = Invoice.new('id' => 12321381203)
+    assert invoice.pending?
+  end
+
+  def test_an_invoice_is_not_pending_when_it_is_paid
+    invoice = Invoice.new('id' => 12321381203)
+    transaction = Transaction.new('id' => 12321381203, 'result' => 'success')
+    invoice.transactions << transaction
+    refute invoice.pending?
+  end
+
+  class MockCustomer
+    def id
+      1234
+    end
+  end
+
+  class MockMerchant
+    def id
+      5678
+    end
+  end
+
+  def invoice_creation_data
+    customer = MockCustomer.new
+    merchant = MockMerchant.new
+    {merchant: merchant, customer: customer}
+  end
+
+  def test_a_created_invoice_has_a_customer
+    invoice = Invoice.create(invoice_creation_data)
+    assert_equal invoice_creation_data[:customer].id, invoice.customer_id
+  end
+
+  def test_a_created_invoice_has_a_merchant
+    invoice = Invoice.create(invoice_creation_data)
+    assert_equal invoice_creation_data[:merchant].id, invoice.merchant_id
+  end
+
+
+
+
+
 end

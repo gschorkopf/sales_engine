@@ -39,12 +39,8 @@ class Transaction
     Invoice.find_by_id(invoice_id)  
   end
 
-  def is_successful?
-    if self.result == 'success'
-      return true
-    else
-      return false
-    end
+  def success?
+    result == 'success'
   end
 
   def self.all_successful

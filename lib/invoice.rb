@@ -6,7 +6,7 @@ class Invoice
     @customer_id = hash['customer_id'].to_i
     @merchant_id = hash['merchant_id'].to_i
     @status = hash['status']
-    @created_at = hash['created_at']
+    @created_at = Date.parse(hash['created_at']) if hash['created_at']
     @updated_at = hash['updated_at']
   end
 
@@ -55,7 +55,7 @@ class Invoice
   end
 
   def transactions
-    Transaction.find_all_by_invoice_id(id)
+    @transactions ||= Transaction.find_all_by_invoice_id(id)
   end
 
   def invoice_items
@@ -70,6 +70,21 @@ class Invoice
   def customer
     Customer.find_by_id(customer_id)
   end
+
+  def paid?
+    transactions.any?{|transaction| transaction.success?}
+  end
+
+  def pending?
+    !paid?
+  end
+
+  def self.create(input)
+    Invoice.new('customer_id'=>input[:customer].id, 
+                'merchant_id'=>input[:merchant].id
+                )
+  end
+
 
   ### Create function for final iteration
   # def self.create(inputs)
