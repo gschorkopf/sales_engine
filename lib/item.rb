@@ -59,31 +59,9 @@ class Item
     @item_totals.find_all {|item| item.merchant_id == input.to_i}
   end
 
-# example of instance method
-  # def invoice
-  #   id = InvoiceItem.invoice_id
-  #   Invoice.find_by_id(id)
-  # end
-
-# refactored example of instance method
-#   def invoice
-#     Invoice.find_by_id(invoice_id)
-#   end
-
   def merchant
-    id = self.merchant_id
-    Merchant.find_by_id(id)
+    Merchant.find_by_id(merchant_id)
   end
-
-# refactored method above
-  # def merchant
-  #   Merchant.find_by_id(id)
-  # end
-
-  # def invoice_items
-  #   collection = self.id
-  #   InvoiceItem.find_by
-  # end
 
   def invoice_items
     InvoiceItem.find_all_by_item_id(id)
@@ -117,6 +95,20 @@ class Item
     sorted_array.keys[0..number-1].each {|item_id| output_list << Item.find_by_id(item_id)}
 
     return output_list 
+  end
+
+  def best_day
+    ii_by_id = InvoiceItem.find_all_by_item_id(id)
+    ii_hash = Hash.new(0)
+    ii_by_id.each do |ii|
+      ii_hash[ii.invoice_id] += ii.quantity
+    end
+
+    output_list = []
+    sorted_array = Hash[ii_hash.sort_by {|inv_id, amount| amount}.reverse]
+    sorted_array.keys.each {|inv_id| output_list << Invoice.find_by_id(inv_id).created_at}
+    # Original dates need to be converted to (%a, %e %b %Y) format!
+    return output_list
   end
 
 end
