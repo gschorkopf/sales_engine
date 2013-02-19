@@ -6,6 +6,7 @@ class CustomerTest < MiniTest::Unit::TestCase
     @output = CustomerBuilder.from_csv("./sample/samp_customers.csv")
     InvoiceBuilder.from_csv("./sample/samp_invoices.csv")
     TransactionBuilder.from_csv("./sample/samp_transactions.csv")
+    MerchantBuilder.from_csv("./sample/samp_merchants.csv")
   end
 
   def test_it_exists
@@ -65,9 +66,14 @@ class CustomerTest < MiniTest::Unit::TestCase
     assert_equal 6, first_customer.invoices.length
   end
 
-  def test_transactions
+  def test_transactions_method_returns_all_trans_associated_with_customer
     joey = Customer.find_by_first_name("Joey")
     assert_equal 6, joey.transactions.length
+  end
+
+  def test_favorite_merchant_method_returns_fav_merchant_based_on_successful_transactions
+    joey = Customer.find_by_first_name("Joey")
+    assert_equal "Eichmann-Turcotte", joey.favorite_merchant.name
   end
 
 end

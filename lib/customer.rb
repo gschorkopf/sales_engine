@@ -46,16 +46,27 @@ class Customer
   end
 
   def transactions
-    invoice_list = Invoice.find_all_by_customer_id(id) #repeated from above
-    invoice_list.collect do |invoice|
+    invoices.collect do |invoice|
       Transaction.find_by_invoice_id(invoice.id)
     end.uniq
   end
 
   def favorite_merchant
-    #returns an instance of Merchant where the customer has 
-    # conducted the most successful transactions
+    invoice_list = Invoice.find_all_by_customer_id(id)
 
+    success_list = Transaction.all_successful
+    merch_id_list = success_list.collect {|inv_id| Invoice.find_by_id(inv_id).merchant_id}
+
+    # merchant_invoice_hash = Hash.new(0)
+    # invoice_list.each do |invoice|
+    #   merch_id_list.include? invoice.merchant_id  
+    #   merchant_invoice_hash[invoice.merchant_id] += 1
+    # end
+
+    # top_merchant = merchant_invoice_hash.sort_by {|k,v| v}.first[0]
+    # Merchant.find_by_id(top_merchant)
+
+    # Method definitely not correct. The "Include?" section does not account for doubles
   end
 
 end
