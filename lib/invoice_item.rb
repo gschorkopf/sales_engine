@@ -13,7 +13,10 @@ class InvoiceItem
 
   def self.store(array)
     @ii_totals = array
-    $invoice_items = array
+  end
+
+  def self.collection
+    @ii_totals
   end
 
   def self.find_all_by_invoice_id(input)
@@ -26,7 +29,7 @@ class InvoiceItem
 
   def self.price_hash
     hash = Hash.new(0)
-    $invoice_items.each do |invoice_item| 
+    InvoiceItem.collection.each do |invoice_item| 
       revenue = invoice_item.unit_price * invoice_item.quantity
       hash[invoice_item.invoice_id] += revenue
     end

@@ -15,6 +15,10 @@ class Item
     @item_totals = array
   end
 
+  def self.collection
+    @item_totals
+  end
+
   def self.random
     @item_totals.sample
   end
@@ -69,7 +73,7 @@ class Item
 
   def self.most_revenue(number)
     item_id_revenue_hash = Hash.new(0)
-    $invoice_items.each do |invoice_item|
+    InvoiceItem.collection.each do |invoice_item|
       amount = invoice_item.quantity
       price = invoice_item.unit_price
       revenue_generated = amount * price
@@ -85,7 +89,7 @@ class Item
 
   def self.most_items(number)
     invoice_item_amount_hash = Hash.new(0)
-    $invoice_items.each do |invoice_item|
+    InvoiceItem.collection.each do |invoice_item|
       amount = invoice_item.quantity
       invoice_item_amount_hash[invoice_item.item_id] += amount
     end

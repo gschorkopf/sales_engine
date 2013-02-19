@@ -13,6 +13,10 @@ class Customer
     @customer_totals = array
   end
 
+  def self.collection
+    @customer_totals
+  end
+
   def self.random
     @customer_totals.sample
   end
