@@ -67,4 +67,17 @@ class Invoice
     Customer.find_by_id(customer_id)
   end
 
+  ### Create function for final iteration
+  # def self.create(inputs)
+  #   new_invoice = InvoiceItem.new(
+  #               id: #what goes here?
+  #               customer_id: input[:customer].id,
+  #               merchant_id: input[:merchant].id,
+  #               status: input[:status]
+  #               created_at: Date.new
+  #               updated_at: Date.new
+  #               )
+  #   @invoice_totals << new_invoice  
+  # end
+
 end
