@@ -45,4 +45,24 @@ class Customer
     Invoice.find_all_by_customer_id(id)
   end
 
+  def transactions
+    invoice_list = Invoice.find_all_by_customer_id(id) #repeated from above
+    invoice_list.collect do |invoice|
+      Transaction.find_by_invoice_id(invoice.id)
+    end.uniq
+  end
+
+  def favorite_merchant
+    #returns an instance of Merchant where the customer has 
+    # conducted the most successful transactions
+
+  end
+
 end
+
+
+
+
+
+
+

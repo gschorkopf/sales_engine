@@ -5,6 +5,7 @@ class CustomerTest < MiniTest::Unit::TestCase
   def setup
     @output = CustomerBuilder.from_csv("./sample/samp_customers.csv")
     InvoiceBuilder.from_csv("./sample/samp_invoices.csv")
+    TransactionBuilder.from_csv("./sample/samp_transactions.csv")
   end
 
   def test_it_exists
@@ -62,6 +63,11 @@ class CustomerTest < MiniTest::Unit::TestCase
   def test_invoices_method_returns_instance_of_invoice
     first_customer = @output.first
     assert_equal 5, first_customer.invoices.length
+  end
+
+  def test_transactions
+    joey = Customer.find_by_first_name("Joey")
+    assert_equal 6, joey.transactions.length
   end
 
 end
