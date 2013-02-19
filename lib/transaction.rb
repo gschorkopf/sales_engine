@@ -35,20 +35,22 @@ class Transaction
     Invoice.find_by_id(invoice_id)  
   end
 
-  # def is_successful?
-  #   if self.result == 'success'
-  #     return true
-  #   else
-  #     return false
-  #   end
-  # end
+  def is_successful?
+    if self.result == 'success'
+      return true
+    else
+      return false
+    end
+  end
 
-  # def self.all_successful
-  #   success_array = []
-  #   @transactions.select {|transaction| transaction.is_successful? == true}.collect |transaction| do 
-  #     success_array << transaction.invoice_id
-  #   end
-  #   success_array
-  # end
+  def self.all_successful
+    success_array = []
+    @transaction_totals.each do |transaction| 
+      if transaction.is_successful? == true
+        success_array << transaction.invoice_id
+      end
+    end
+    success_array
+  end
 
 end
