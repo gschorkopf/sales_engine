@@ -77,9 +77,8 @@ class Merchant
 
     merchant_quantity_hash = Hash.new(0)
     invoice_item_amount_hash.each_pair do |inv_id, amount|
-      invoice_object = Invoice.find_by_id(inv_id)
-      merchant_object = Merchant.find_by_id(invoice_object.merchant_id)
-      merchant_quantity_hash[merchant_object.id] += amount 
+      merchant = Merchant.find_by_invoice_id(inv_id)
+      merchant_quantity_hash[merchant.id] += amount 
     end
 
     output_list = []
