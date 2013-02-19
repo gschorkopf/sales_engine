@@ -40,25 +40,41 @@ class Merchant
     Invoice.find_all_by_merchant_id(id)
   end
 
-  def self.most_revenue(number)
-    invoice_item_price_hash = Hash.new(0)
+  def self.invoice_item_price_hash
+    hash = Hash.new(0)
     $invoice_items.each do |invoice_item| 
       revenue = invoice_item.unit_price * invoice_item.quantity
-      invoice_item_price_hash[invoice_item.invoice_id] += revenue
+      hash[invoice_item.invoice_id] += revenue
     end
+    hash
+  end
 
-    merchant_revenue_hash = Hash.new(0)
+  def self.find_by_invoice_id(inv_id)
+    invoice_object = Invoice.find_by_id(inv_id)
+    Merchant.find_by_id(invoice_object.merchant_id)
+  end
+
+  def self.merchant_revenue_hash
+    hash = Hash.new(0)
     invoice_item_price_hash.each_pair do |inv_id, revenue|
-      invoice_object = Invoice.find_by_id(inv_id)
-      merchant_object = Merchant.find_by_id(invoice_object.merchant_id)
-      merchant_revenue_hash[merchant_object.id] += revenue
+      merchant = Merchant.find_by_invoice_id(inv_id)
+      hash[merchant.id] += revenue
     end
+    hash
+  end
 
-    output_list = []
-    sorted_array = Hash[merchant_revenue_hash.sort_by {|merchant_id, revenue| revenue}.reverse]
-    sorted_array.keys[0..number-1].each {|merchant_id| output_list << Merchant.find_by_id(merchant_id)}
+  def self.merchants_sorted_highest_to_lowest_revenue
+    merchant_revenue_hash.sort_by {|merchant_id, revenue| revenue}.reverse
+  end
 
-    return output_list 
+  def self.most_revenue(number)
+    sorted_array = Hash[merchants_sorted_highest_to_lowest_revenue]
+    merchant_ids = sorted_array.keys[0,number]
+    Merchant.find_all_by_ids(merchant_ids)
+  end
+
+  def self.find_all_by_ids(array_of_ids)
+    array_of_ids.collect {|merchant_id| Merchant.find_by_id(merchant_id)}
   end
 
   def self.most_items(number)
