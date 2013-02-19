@@ -24,6 +24,15 @@ class Merchant
     @merchant_totals.find_all {|merchant| merchant.id == input.to_i}
   end
 
+  def self.find_all_by_ids(array_of_ids)
+    array_of_ids.collect {|merchant_id| Merchant.find_by_id(merchant_id)}
+  end
+
+  def self.find_by_invoice_id(inv_id)
+    invoice_object = Invoice.find_by_id(inv_id)
+    Merchant.find_by_id(invoice_object.merchant_id)
+  end
+
   def self.find_by_name(input) 
     @merchant_totals.find {|merchant| merchant.name.downcase == input.downcase}
   end
@@ -49,11 +58,6 @@ class Merchant
     hash
   end
 
-  def self.find_by_invoice_id(inv_id)
-    invoice_object = Invoice.find_by_id(inv_id)
-    Merchant.find_by_id(invoice_object.merchant_id)
-  end
-
   def self.merchant_revenue_hash
     hash = Hash.new(0)
     invoice_item_price_hash.each_pair do |inv_id, revenue|
@@ -71,10 +75,6 @@ class Merchant
     sorted_array = Hash[merchants_sorted_highest_to_lowest_revenue]
     merchant_ids = sorted_array.keys[0,number]
     Merchant.find_all_by_ids(merchant_ids)
-  end
-
-  def self.find_all_by_ids(array_of_ids)
-    array_of_ids.collect {|merchant_id| Merchant.find_by_id(merchant_id)}
   end
 
   def self.most_items(number)
