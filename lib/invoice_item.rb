@@ -24,6 +24,15 @@ class InvoiceItem
     @ii_totals.find_all {|ii| ii.item_id == input}
   end
 
+  def self.price_hash
+    hash = Hash.new(0)
+    $invoice_items.each do |invoice_item| 
+      revenue = invoice_item.unit_price * invoice_item.quantity
+      hash[invoice_item.invoice_id] += revenue
+    end
+    hash
+  end
+
   def invoice
     Invoice.find_by_id(invoice_id)
   end

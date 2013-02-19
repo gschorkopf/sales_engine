@@ -49,18 +49,9 @@ class Merchant
     Invoice.find_all_by_merchant_id(id)
   end
 
-  def self.invoice_item_price_hash
-    hash = Hash.new(0)
-    $invoice_items.each do |invoice_item| 
-      revenue = invoice_item.unit_price * invoice_item.quantity
-      hash[invoice_item.invoice_id] += revenue
-    end
-    hash
-  end
-
   def self.merchant_revenue_hash
     hash = Hash.new(0)
-    invoice_item_price_hash.each_pair do |inv_id, revenue|
+    InvoiceItem.price_hash.each_pair do |inv_id, revenue|
       merchant = Merchant.find_by_invoice_id(inv_id)
       hash[merchant.id] += revenue
     end
