@@ -62,7 +62,7 @@ class CustomerTest < MiniTest::Unit::TestCase
 
   def test_invoices_method_returns_instance_of_invoice
     first_customer = @output.first
-    assert_equal 5, first_customer.invoices.length
+    assert_equal 6, first_customer.invoices.length
   end
 
   def test_transactions

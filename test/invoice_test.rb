@@ -54,12 +54,12 @@ class InvoiceTest < MiniTest::Unit::TestCase
 
   def test_find_all_by_customer_id_finds_all_invoices_by_customer_id
     invoice = Invoice.find_all_by_customer_id(1)
-    assert_equal 5, invoice.length
+    assert_equal 6, invoice.length
   end
 
   def test_find_all_by_customer_id_finds_all_invoices_by_customer_id_string
     invoice = Invoice.find_all_by_customer_id('1')
-    assert_equal 5, invoice.length
+    assert_equal 6, invoice.length
   end
 
   def test_find_all_by_merchant_id_finds_all_invoices_by_merchant_id
@@ -69,7 +69,7 @@ class InvoiceTest < MiniTest::Unit::TestCase
 
   def test_find_all_by_status_finds_all_invoices_by_status
     invoice = Invoice.find_all_by_status('shipped')
-    assert_equal 5, invoice.length
+    assert_equal 6, invoice.length
   end
 
   def test_transaction_method_on_invoice_returns_collection
