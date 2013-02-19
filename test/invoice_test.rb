@@ -11,7 +11,7 @@ class InvoiceTest < MiniTest::Unit::TestCase
   end
 
   def test_it_exists
-    invoice = Invoice.new('sample_hash')
+    invoice = Invoice.random
     assert_kind_of Invoice, invoice
   end
 

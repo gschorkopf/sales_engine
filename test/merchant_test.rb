@@ -7,6 +7,7 @@ class MerchantTest < MiniTest::Unit::TestCase
     ItemBuilder.from_csv("./sample/samp_items.csv")
     InvoiceItemBuilder.from_csv("./sample/samp_invoice_items.csv")
     InvoiceBuilder.from_csv("./sample/samp_invoices.csv")
+    TransactionBuilder.from_csv("./sample/samp_transactions.csv")
   end
 
   def test_it_exists
@@ -60,5 +61,23 @@ class MerchantTest < MiniTest::Unit::TestCase
     assert_equal 2, most_items.length
     assert_equal "Balistreri, Schaefer and Kshlerin", most_items.first.name
   end
+
+  def test_revenue_returns_total_rev_for_specific_merch
+    merchant = Merchant.find_by_id(75)
+    assert_equal 237423, merchant.revenue
+  end
+
+  def test_class_variable_revenue_date_returns_total_rev_for_date_all_merchants
+    date_amount = Merchant.revenue('Sat, 25 Mar 2012')
+    assert_equal 1117643, date_amount
+  end
+
+
+
+
+
+
+
+
 
 end
