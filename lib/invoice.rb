@@ -14,6 +14,10 @@ class Invoice
     @invoice_totals = array
   end
 
+  def self.collection
+    @invoice_totals
+  end
+
   def self.random
     @invoice_totals.sample
   end

@@ -15,6 +15,10 @@ class Transaction
     @transaction_totals = array
   end
 
+  def self.collection
+    @transaction_totals
+  end
+
   def self.random
     @transaction_totals.sample
   end
@@ -47,7 +51,7 @@ class Transaction
     success_array = []
     @transaction_totals.each do |transaction| 
       if transaction.is_successful? == true
-        success_array << transaction.invoice_id
+        success_array << transaction
       end
     end
     success_array

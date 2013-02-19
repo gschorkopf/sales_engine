@@ -12,6 +12,10 @@ class Merchant
     @merchant_totals = array
   end
 
+  def self.collection
+    @merchant_totals
+  end
+
   def self.random
     @merchant_totals.sample
   end
@@ -70,7 +74,7 @@ class Merchant
 
   def self.most_items(number)
     invoice_item_amount_hash = Hash.new(0)
-    $invoice_items.each do |invoice_item|
+    InvoiceItem.collection.each do |invoice_item|
       amount = invoice_item.quantity
       invoice_item_amount_hash[invoice_item.invoice_id] += amount
     end
