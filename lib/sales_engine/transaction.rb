@@ -83,7 +83,8 @@ module SalesEngine
         'created_at' => Time.now.to_s,
         'updated_at' => Time.now.to_s}
         )
-      @transaction_totals << new_trans
+      Invoice.find_by_id(new_trans.invoice_id).transactions << new_trans
+      #@transaction_totals << new_trans
       return new_trans
     end
 

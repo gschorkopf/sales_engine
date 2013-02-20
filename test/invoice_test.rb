@@ -123,34 +123,5 @@ module SalesEngine
       invoice.transactions << transaction
       refute invoice.pending?
     end
-
-    class MockCustomer
-      def id
-        1234
-      end
-    end
-
-    class MockMerchant
-      def id
-        5678
-      end
-    end
-
-    def invoice_creation_data
-      customer = MockCustomer.new
-      merchant = MockMerchant.new
-      {merchant: merchant, customer: customer}
-    end
-
-    def test_a_created_invoice_has_a_customer
-      invoice = Invoice.create(invoice_creation_data)
-      assert_equal invoice_creation_data[:customer].id, invoice.customer_id
-    end
-
-    def test_a_created_invoice_has_a_merchant
-      invoice = Invoice.create(invoice_creation_data)
-      assert_equal invoice_creation_data[:merchant].id, invoice.merchant_id
-    end
-
   end
 end

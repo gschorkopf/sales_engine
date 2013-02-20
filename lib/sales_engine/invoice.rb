@@ -57,7 +57,7 @@ module SalesEngine
 
     def transactions
       # Needed? This crashes BI charge test: @transactions ||= 
-      Transaction.find_all_by_invoice_id(id)
+      @transactions ||= Transaction.find_all_by_invoice_id(id)
     end
 
     def invoice_items
