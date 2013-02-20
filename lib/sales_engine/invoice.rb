@@ -8,7 +8,7 @@ module SalesEngine
       @merchant_id = hash['merchant_id'].to_i
       @status = hash['status']
       @created_at = Date.parse(hash['created_at']) if hash['created_at']
-      @updated_at = hash['updated_at']
+      @updated_at = Date.parse(hash['updated_at']) if hash['updated_at']
     end
 
     def self.store(array)
@@ -56,7 +56,8 @@ module SalesEngine
     end
 
     def transactions
-      @transactions ||= Transaction.find_all_by_invoice_id(id)
+      # Needed? This crashes BI charge test: @transactions ||= 
+      Transaction.find_all_by_invoice_id(id)
     end
 
     def invoice_items
@@ -90,8 +91,8 @@ module SalesEngine
         'customer_id'=>input[:customer].id, 
         'merchant_id'=>input[:merchant].id,
         'status'=>input[:status],
-        'created_at'=>Time.now.to_s,
-        'updated_at'=>Time.now.to_s
+        'created_at'=>Date.new.to_s,
+        'updated_at'=>Date.new.to_s
         })
       @invoice_totals << new_invoice
 
@@ -110,6 +111,7 @@ module SalesEngine
           'quantity' => quantity
           )
       end
+      return new_invoice
     end
 
     def charge(input)

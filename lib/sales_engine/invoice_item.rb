@@ -77,17 +77,17 @@ module SalesEngine
 
     ### Begin untested section
     def self.new_id
-      collection.count + 1 #Cheating way?
+      collection.count + 1
     end
 
     def self.create(input)
       new_ii = InvoiceItem.new({'id' => new_id,
-                                'item_id' => input[:item_id],
-                                'invoice_id' => input[:invoice_id],
-                                'quantity' => input[:quantity],
-                                'unit_price' => input[:unit_price],
-                                'created_at' => Time.now.to_s, 
-                                'updated_at' => Time.now.to_s})
+                                'item_id' => input['item_id'],
+                                'invoice_id' => input['invoice_id'],
+                                'quantity' => input['quantity'],
+                                'unit_price' => input['unit_price'],
+                                'created_at' => Date.new.to_s, 
+                                'updated_at' => Date.new.to_s})
       @ii_totals << new_ii
     end
     ### End untested section
