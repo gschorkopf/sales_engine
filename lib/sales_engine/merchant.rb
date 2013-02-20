@@ -78,22 +78,26 @@ module SalesEngine
     end
 
     def self.most_items(number)
-      invoice_item_amount_hash = Hash.new(0)
+      ii_amt_hash = Hash.new(0)
       InvoiceItem.paid_ii.each do |invoice_item|
         amount = invoice_item.quantity
-        invoice_item_amount_hash[invoice_item.invoice_id] += amount
+        ii_amt_hash[invoice_item.invoice_id] += amount
       end
 
       merchant_quantity_hash = Hash.new(0)
-      invoice_item_amount_hash.each_pair do |inv_id, amount|
+      ii_amt_hash.each_pair do |inv_id, amount|
         merchant = Merchant.find_by_invoice_id(inv_id)
         merchant_quantity_hash[merchant.id] += amount
       end
+      sort_items(merchant_quantity_hash, number)
+    end
 
+    def self.sort_items(hash, num)
       output_list = []
-      sorted_array = Hash[merchant_quantity_hash.sort_by {|merchant_id, amount| amount}.reverse]
-      sorted_array.keys[0..number-1].each {|merchant_id| output_list << Merchant.find_by_id(merchant_id)}
-
+      sorted_array = Hash[hash.sort_by {|k, v| v}.reverse]
+      sorted_array.keys[0,num].each do |merch_id|
+        output_list << Merchant.find_by_id(merch_id)
+      end
       return output_list
     end
 

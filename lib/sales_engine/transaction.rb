@@ -43,7 +43,9 @@ module SalesEngine
     end
 
     def self.find_by_credit_card_number(input)
-      @transaction_totals.find {|transaction| transaction.credit_card_number == input.to_i}
+      @transaction_totals.find do |transaction|
+        transaction.credit_card_number == input.to_i
+      end
     end
 
     def invoice
