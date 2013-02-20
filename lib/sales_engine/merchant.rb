@@ -93,17 +93,19 @@ module SalesEngine
       return output_list 
     end
 
-    def revenue(date = "none given")
-      if date == "none given"
+    def revenue(date = :all)
+      if date == :all
         Merchant.merchant_revenue_hash[id]
       else
-        date_revenue_hash = Hash.new(0) 
+        total_revenue = 0
         InvoiceItem.price_hash.each_pair do |inv_id, revenue|
           create_date = Invoice.find_by_id(inv_id).created_at
-          date_revenue_hash[create_date] += revenue
+          merch_id = Invoice.find_by_id(inv_id).merchant_id
+          if create_date == date && merch_id == id
+            total_revenue += revenue
+          end
         end
-
-        date_revenue_hash[date] ### should this be parsed?
+        total_revenue
       end
     end
 
@@ -113,7 +115,7 @@ module SalesEngine
         creation_date_revenue_hash[Invoice.find_by_id(inv_id).created_at] += revenue
       end
 
-      creation_date_revenue_hash[date] ### should this be parsed?
+      creation_date_revenue_hash[date]
     end
 
     def favorite_customer

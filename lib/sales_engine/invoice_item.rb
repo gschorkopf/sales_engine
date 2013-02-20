@@ -60,7 +60,7 @@ module SalesEngine
 
     def self.price_hash
       hash = Hash.new(0)
-      InvoiceItem.collection.each do |invoice_item| 
+      InvoiceItem.paid_ii.each do |invoice_item| 
         revenue = invoice_item.unit_price * invoice_item.quantity
         hash[invoice_item.invoice_id] += revenue
       end
