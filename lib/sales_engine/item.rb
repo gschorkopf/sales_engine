@@ -1,6 +1,7 @@
 module SalesEngine
   class Item
-    attr_reader :id, :name, :description, :unit_price, :merchant_id, :created_at, :updated_at
+    attr_reader :id, :name, :description, :unit_price,
+                :merchant_id, :created_at, :updated_at
 
     def initialize(hash)
       @id = hash['id'].to_i
@@ -32,7 +33,7 @@ module SalesEngine
       @item_totals.find_all {|item| item.id == input.to_i}
     end
 
-    def self.find_by_name(input) 
+    def self.find_by_name(input)
       @item_totals.find {|item| item.name.downcase == input.downcase}
     end
 
@@ -48,15 +49,15 @@ module SalesEngine
       @item_totals.find_all{|item| item.description.downcase == input.downcase}
     end
 
-    def self.find_by_unit_price(input) 
+    def self.find_by_unit_price(input)
       @item_totals.find {|item| item.unit_price == input}
     end
 
     def self.find_all_by_unit_price(input)
       @item_totals.find_all {|item| item.unit_price == input}
-    end  
+    end
 
-    def self.find_by_merchant_id(input) 
+    def self.find_by_merchant_id(input)
       @item_totals.find {|item| item.merchant_id == input.to_i}
     end
 
@@ -85,7 +86,7 @@ module SalesEngine
       sorted_array = Hash[item_id_revenue_hash.sort_by {|item_id, revenue| revenue}.reverse]
       sorted_array.keys[0..number-1].each {|item_id| output_list << Item.find_by_id(item_id)}
 
-      return output_list 
+      return output_list
     end
 
     def self.most_items(number)
@@ -99,7 +100,7 @@ module SalesEngine
       sorted_array = Hash[invoice_item_amount_hash.sort_by {|item_id, amount| amount}.reverse]
       sorted_array.keys[0..number-1].each {|item_id| output_list << Item.find_by_id(item_id)}
 
-      return output_list 
+      return output_list
     end
 
     def best_day

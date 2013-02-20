@@ -1,6 +1,6 @@
 module SalesEngine
   class TransactionBuilder
-    
+
     def self.from_csv(filename="./data/transactions.csv")
       parse CSV.open(filename, headers: true)
     end

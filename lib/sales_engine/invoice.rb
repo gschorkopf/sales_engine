@@ -1,6 +1,7 @@
 module SalesEngine
   class Invoice
-    attr_reader :id, :customer_id, :merchant_id, :status, :created_at, :updated_at
+    attr_reader :id, :customer_id, :merchant_id,
+                :status, :created_at, :updated_at
 
     def initialize(hash)
       @id = hash['id'].to_i
@@ -56,7 +57,7 @@ module SalesEngine
     end
 
     def transactions
-      # Needed? This crashes BI charge test: @transactions ||= 
+      # Needed? This crashes BI charge test: @transactions ||=
       @transactions ||= Transaction.find_all_by_invoice_id(id)
     end
 
@@ -65,7 +66,7 @@ module SalesEngine
     end
 
     def items
-      invoice_items.collect{|invoice_item| invoice_item.item}  
+      invoice_items.collect{|invoice_item| invoice_item.item}
     end
 
     def customer
@@ -88,7 +89,7 @@ module SalesEngine
     def self.create(input)
       new_invoice = Invoice.new({
         'id'=> new_id,
-        'customer_id'=>input[:customer].id, 
+        'customer_id'=>input[:customer].id,
         'merchant_id'=>input[:merchant].id,
         'status'=>input[:status],
         'created_at'=>Date.new.to_s,
@@ -100,7 +101,7 @@ module SalesEngine
 
       items_count = Hash.new(0)
       new_items.each do |item|
-        items_count[item] += 1 
+        items_count[item] += 1
       end
 
       items_count.each do |item, quantity|

@@ -1,6 +1,7 @@
 module SalesEngine
   class InvoiceItem
-    attr_reader :id, :item_id, :invoice_id, :quantity, :unit_price, :created_at, :updated_at
+    attr_reader :id, :item_id, :invoice_id, :quantity,
+                :unit_price, :created_at, :updated_at
 
     def initialize(hash)
       @id = hash['id'].to_i
@@ -65,7 +66,7 @@ module SalesEngine
 
     def self.price_hash
       hash = Hash.new(0)
-      InvoiceItem.paid_ii.each do |invoice_item| 
+      InvoiceItem.paid_ii.each do |invoice_item|
         revenue = invoice_item.unit_price * invoice_item.quantity
         hash[invoice_item.invoice_id] += revenue
       end
@@ -86,13 +87,15 @@ module SalesEngine
     end
 
     def self.create(input)
-      new_ii = InvoiceItem.new({'id' => new_id,
-                                'item_id' => input['item_id'],
-                                'invoice_id' => input['invoice_id'],
-                                'quantity' => input['quantity'],
-                                'unit_price' => input['unit_price'],
-                                'created_at' => Date.new.to_s, 
-                                'updated_at' => Date.new.to_s})
+      new_ii = InvoiceItem.new(
+        {'id' => new_id,
+        'item_id' => input['item_id'],
+        'invoice_id' => input['invoice_id'],
+        'quantity' => input['quantity'],
+        'unit_price' => input['unit_price'],
+        'created_at' => Date.new.to_s,
+        'updated_at' => Date.new.to_s}
+        )
       @ii_totals << new_ii
     end
     ### End untested section

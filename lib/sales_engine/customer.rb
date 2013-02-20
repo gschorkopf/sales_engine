@@ -11,39 +11,45 @@ module SalesEngine
     end
 
     def self.store(array)
-      @customer_totals = array
+      @customers = array
     end
 
     def self.collection
-      @customer_totals
+      @customers
     end
 
     def self.random
-      @customer_totals.sample
+      @customers.sample
     end
 
     def self.find_by_id(input)
-      @customer_totals.find {|customer| customer.id == input.to_i}
+      @customers.find {|customer| customer.id == input.to_i}
     end
 
      def self.find_by_first_name(input)
-      @customer_totals.find {|customer| customer.first_name.downcase == input.downcase}
+      @customers.find do |customer|
+        customer.first_name.downcase == input.downcase
+      end
     end
 
     def self.find_by_last_name(input)
-      @customer_totals.find {|customer| customer.last_name.downcase == input.downcase}
+      @customers.find {|customer| customer.last_name.downcase == input.downcase}
     end
 
     def self.find_all_by_id(input)
-      @customer_totals.find_all {|customer| customer.id == input.to_i}
+      @customers.find_all {|customer| customer.id == input.to_i}
     end
 
     def self.find_all_by_first_name(input)
-      @customer_totals.find_all {|customer| customer.first_name.downcase == input.downcase}
+      @customers.find_all do |customer|
+        customer.first_name.downcase == input.downcase
+      end
     end
 
     def self.find_all_by_last_name(input)
-      @customer_totals.find_all {|customer| customer.last_name.downcase == input.downcase}
+      @customers.find_all do |customer|
+        customer.last_name.downcase == input.downcase
+      end
     end
 
     def invoices
@@ -60,7 +66,7 @@ module SalesEngine
       inv_ids = Transaction.all_successful.collect do |successful_transaction|
         successful_transaction.invoice_id
       end
-      
+
       merch_array = []
       inv_ids.each do |inv_id|
         if Invoice.find_by_id(inv_id).customer_id == id
@@ -75,20 +81,6 @@ module SalesEngine
 
       merch_id_top_hash.sort_by {|merchant, trans| trans}.reverse.first.first
     end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   end
 end

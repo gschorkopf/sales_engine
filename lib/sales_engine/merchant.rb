@@ -38,12 +38,16 @@ module SalesEngine
       Merchant.find_by_id(invoice_object.merchant_id)
     end
 
-    def self.find_by_name(input) 
-      @merchant_totals.find {|merchant| merchant.name.downcase == input.downcase}
+    def self.find_by_name(input)
+      @merchant_totals.find do |merchant|
+        merchant.name.downcase == input.downcase
+      end
     end
 
     def self.find_all_by_name(input)
-      @merchant_totals.find_all {|merchant| merchant.name.downcase == input.downcase}
+      @merchant_totals.find_all do |merchant|
+        merchant.name.downcase == input.downcase
+      end
     end
 
     def items
@@ -83,14 +87,14 @@ module SalesEngine
       merchant_quantity_hash = Hash.new(0)
       invoice_item_amount_hash.each_pair do |inv_id, amount|
         merchant = Merchant.find_by_invoice_id(inv_id)
-        merchant_quantity_hash[merchant.id] += amount 
+        merchant_quantity_hash[merchant.id] += amount
       end
 
       output_list = []
       sorted_array = Hash[merchant_quantity_hash.sort_by {|merchant_id, amount| amount}.reverse]
       sorted_array.keys[0..number-1].each {|merchant_id| output_list << Merchant.find_by_id(merchant_id)}
 
-      return output_list 
+      return output_list
     end
 
     def revenue(date = :all)
@@ -112,7 +116,8 @@ module SalesEngine
     def self.revenue(date)
       creation_date_revenue_hash = Hash.new(0)
       InvoiceItem.price_hash.each_pair do |inv_id, revenue|
-        creation_date_revenue_hash[Invoice.find_by_id(inv_id).created_at] += revenue
+        creat_date = Invoice.find_by_id(inv_id).created_at
+        creation_date_revenue_hash[creat_date] += revenue
       end
 
       creation_date_revenue_hash[date]
@@ -122,7 +127,7 @@ module SalesEngine
       inv_ids = Transaction.all_successful.collect do |successful_transaction|
         successful_transaction.invoice_id
       end
-      
+
       cust_array = []
       inv_ids.each do |inv_id|
         if Invoice.find_by_id(inv_id).merchant_id == id

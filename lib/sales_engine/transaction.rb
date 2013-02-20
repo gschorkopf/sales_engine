@@ -1,6 +1,8 @@
 module SalesEngine
   class Transaction
-    attr_reader :id, :invoice_id, :credit_card_number, :credit_card_expiration_date, :result, :created_at, :updated_at
+    attr_reader :id, :invoice_id, :credit_card_number,
+                :credit_card_expiration_date, :result,
+                :created_at, :updated_at
 
     def initialize(hash)
       @id = hash['id'].to_i
@@ -24,30 +26,28 @@ module SalesEngine
       @transaction_totals.sample
     end
 
-    # missing test
-    # done
     def self.find_by_id(input)
       @transaction_totals.find {|transaction| transaction.id == input.to_i}
     end
 
-    # missing test
-    # done
     def self.find_by_invoice_id(input)
-      @transaction_totals.find {|transaction| transaction.invoice_id == input.to_i}
+      @transaction_totals.find do |transaction|
+        transaction.invoice_id == input.to_i
+      end
     end
 
     def self.find_all_by_invoice_id(input)
-      @transaction_totals.find_all {|transaction| transaction.invoice_id == input.to_i}
+      @transaction_totals.find_all do |transaction|
+        transaction.invoice_id == input.to_i
+      end
     end
 
-    # missing test
-    # done
     def self.find_by_credit_card_number(input)
       @transaction_totals.find {|transaction| transaction.credit_card_number == input.to_i}
     end
 
     def invoice
-      Invoice.find_by_id(invoice_id)  
+      Invoice.find_by_id(invoice_id)
     end
 
     def success?
@@ -56,7 +56,7 @@ module SalesEngine
 
     def self.all_successful
       success_array = []
-      @transaction_totals.each do |transaction| 
+      @transaction_totals.each do |transaction|
         if transaction.success? == true
           success_array << transaction
         end
@@ -64,9 +64,10 @@ module SalesEngine
       success_array
     end
 
-    ### OR we need to use this anyway for the rspec
     def self.find_all_by_result(input)
-      @transaction_totals.find_all {|transaction| transaction.result == input.downcase}
+      @transaction_totals.find_all do |transaction|
+        transaction.result == input.downcase
+      end
     end
 
     def self.new_id
@@ -84,7 +85,7 @@ module SalesEngine
         'updated_at' => Time.now.to_s}
         )
       Invoice.find_by_id(new_trans.invoice_id).transactions << new_trans
-      #@transaction_totals << new_trans
+      # @transaction_totals << new_trans
       return new_trans
     end
 
