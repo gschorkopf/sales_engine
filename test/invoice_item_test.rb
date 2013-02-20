@@ -14,6 +14,11 @@ module SalesEngine
       assert_kind_of InvoiceItem, ii
     end
 
+    def test_ii_paid_returns_collection_of_paid_for_iis
+      paid_ii = InvoiceItem.paid_ii
+      assert_equal 6, paid_ii.length
+    end
+
     def test_find_all_by_invoice_id_returns_collect_of_invoice_items
       ii = InvoiceItem.find_all_by_invoice_id(1)
       assert_equal 5, ii.length

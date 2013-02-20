@@ -20,6 +20,12 @@ module SalesEngine
       @ii_totals
     end
 
+    def self.paid_ii
+      @paid_ii = @ii_totals.collect do |ii|
+        ii if Invoice.find_by_id(ii.invoice_id).paid?
+      end
+    end
+
     def self.random
       @ii_totals.sample
     end

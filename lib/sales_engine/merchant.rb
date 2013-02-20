@@ -103,7 +103,7 @@ module SalesEngine
           date_revenue_hash[create_date] += revenue
         end
 
-        date_revenue_hash[Date.parse(date)]
+        date_revenue_hash[date] ### should this be parsed?
       end
     end
 
@@ -113,7 +113,7 @@ module SalesEngine
         creation_date_revenue_hash[Invoice.find_by_id(inv_id).created_at] += revenue
       end
 
-      creation_date_revenue_hash[Date.parse(date)]
+      creation_date_revenue_hash[date] ### should this be parsed?
     end
 
     def favorite_customer
@@ -149,20 +149,3 @@ module SalesEngine
 
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
