@@ -97,7 +97,7 @@ module SalesEngine
       end
 
       items_count.each do |item, quantity|
-        InvoiceItem.create("invoice_id" => invoice.id,
+        InvoiceItem.create("invoice_id" => new_invoice.id,
                           "item_id" => item.id,
                           "unit_price" => item.unit_price,
                           "quantity" => quantity
