@@ -20,9 +20,9 @@ module SalesEngine
     end
 
     # new test
-    def find_by_invoice_id_finds_transaction_by_invoice_id
-      transaction = Transaction.find_by_invoice_id(6)
-      assert_equal 1, transaction.invoice_id
+    def test_find_by_invoice_id_finds_transaction_by_invoice_id
+      transaction = Transaction.find_by_invoice_id(5)
+      assert_equal 5, transaction.invoice_id
     end
 
     def test_find_all_by_invoice_id_finds_all_invoices_by_matching_id
@@ -31,9 +31,9 @@ module SalesEngine
     end
 
     # new test
-    def find_by_credit_card_number_finds_transaction_by_credit_card_number
-      transaction = Transaction.find_by_credit_card_number(100)
-      assert_equal 200, transaction.credit_card_number       
+    def test_find_by_credit_card_number_finds_transaction_by_credit_card_number
+      transaction = Transaction.find_by_credit_card_number(4654405418249632)
+      assert_equal 4654405418249632, transaction.credit_card_number       
     end
 
     def test_invoice_method_finds_instance_of_invoice_associated_with_transaction
