@@ -27,6 +27,7 @@ module SalesEngine
     def self.find_by_id(input)
       @ii_totals.find {|ii| ii.id == input.to_i}
       #no matching test
+      #done
     end
 
     def self.find_all_by_invoice_id(input)
@@ -36,15 +37,19 @@ module SalesEngine
     def self.find_by_item_id(input)
       @ii_totals.find {|ii| ii.item_id == input.to_i}
       #no matching test
+      #done
     end
 
     def self.find_all_by_item_id(input)
       @ii_totals.find_all {|ii| ii.item_id == input.to_i}
+      #no matching test
+      #done
     end
 
     def self.find_all_by_quantity(input)
       @ii_totals.find_all {|ii| ii.quantity == input.to_i}
       #no matching test
+      #done
     end
 
     def self.price_hash

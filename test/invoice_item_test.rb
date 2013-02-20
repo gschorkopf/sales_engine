@@ -14,9 +14,33 @@ module SalesEngine
       assert_kind_of InvoiceItem, ii
     end
 
+    # new test
+    def test_find_by_id_finds_single_instance_of_matching_id
+      ii = InvoiceItem.find_by_id(5)
+      assert_equal 5, ii.id
+    end
+
     def test_find_all_by_invoice_id_returns_collect_of_invoice_items
       ii = InvoiceItem.find_all_by_invoice_id(1)
       assert_equal 5, ii.length
+    end
+
+    # new test
+    def test_find_by_item_id_finds_invoice_item_by_item_id
+      ii = InvoiceItem.find_by_item_id(539)
+      assert_equal 539, ii.item_id
+    end
+
+    # new test
+    def test_find_all_by_item_id_returns_all_invoice_items_matching_item_id
+      ii = InvoiceItem.find_all_by_item_id(539)
+      assert_equal 2, ii.length
+    end
+
+    # new test
+    def find_all_by_quantity_returns_all_invoice_items_matching_quantity
+      ii_quantity = InvoiceItem.find_all_by_quantity(1)
+      assert_equal 33, ii_quantity.length
     end
 
     def test_invoice_method_on_ii_returns_instance_of_invoice
