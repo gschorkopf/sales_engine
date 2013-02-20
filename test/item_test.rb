@@ -51,12 +51,12 @@ module SalesEngine
     end 
 
     def test_find_by_unit_price_finds_items_by_matching_unit_price
-      item = Item.find_by_unit_price(75107)
+      item = Item.find_by_unit_price(Clean.price(75107))
       assert_equal Clean.price(75107), item.unit_price
     end
 
     def test_find_all_by_unit_price_finds_all_items_by_matching_unit_price
-      item_unit_prices = Item.find_all_by_unit_price(75107)
+      item_unit_prices = Item.find_all_by_unit_price(Clean.price(75107))
       assert_equal 1, item_unit_prices.length
     end
 

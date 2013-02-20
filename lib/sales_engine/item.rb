@@ -49,11 +49,11 @@ module SalesEngine
     end
 
     def self.find_by_unit_price(input) 
-      @item_totals.find {|item| item.unit_price == Clean.price(input)}
+      @item_totals.find {|item| item.unit_price == input}
     end
 
     def self.find_all_by_unit_price(input)
-      @item_totals.find_all {|item| item.unit_price == Clean.price(input)}
+      @item_totals.find_all {|item| item.unit_price == input}
     end  
 
     def self.find_by_merchant_id(input) 

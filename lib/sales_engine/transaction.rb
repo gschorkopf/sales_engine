@@ -58,5 +58,10 @@ module SalesEngine
       success_array
     end
 
+    ### OR we need to use this anyway for the rspec
+    def self.find_all_by_result(input)
+      @transaction_totals.find_all {|transaction| transaction.result == input.downcase}
+    end
+
   end
 end
