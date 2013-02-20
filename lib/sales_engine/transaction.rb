@@ -24,10 +24,14 @@ module SalesEngine
       @transaction_totals.sample
     end
 
+    # missing test
+    # done
     def self.find_by_id(input)
       @transaction_totals.find {|transaction| transaction.id == input.to_i}
     end
 
+    # missing test
+    # done
     def self.find_by_invoice_id(input)
       @transaction_totals.find {|transaction| transaction.invoice_id == input.to_i}
     end
@@ -36,6 +40,8 @@ module SalesEngine
       @transaction_totals.find_all {|transaction| transaction.invoice_id == input.to_i}
     end
 
+    # missing test
+    # done
     def self.find_by_credit_card_number(input)
       @transaction_totals.find {|transaction| transaction.credit_card_number == input.to_i}
     end

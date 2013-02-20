@@ -13,9 +13,27 @@ module SalesEngine
       assert_kind_of Transaction, transaction
     end
 
+    # new test
+    def test_find_by_id_finds_transaction_by_id
+      transaction = Transaction.find_by_id(4)
+      assert_equal 4, transaction.id
+    end
+
+    # new test
+    def find_by_invoice_id_finds_transaction_by_invoice_id
+      transaction = Transaction.find_by_invoice_id(6)
+      assert_equal 1, transaction.invoice_id
+    end
+
     def test_find_all_by_invoice_id_finds_all_invoices_by_matching_id
       transactions = Transaction.find_all_by_invoice_id(4)
       assert_equal 1, transactions.length
+    end
+
+    # new test
+    def find_by_credit_card_number_finds_transaction_by_credit_card_number
+      transaction = Transaction.find_by_credit_card_number(100)
+      assert_equal 200, transaction.credit_card_number       
     end
 
     def test_invoice_method_finds_instance_of_invoice_associated_with_transaction
