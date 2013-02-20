@@ -1,7 +1,8 @@
 require './test/support'
 
-class TransactionBuilderTest < MiniTest::Unit::TestCase
-  
+module SalesEngine
+  class TransactionBuilderTest < MiniTest::Unit::TestCase
+
   def setup
     @output = TransactionBuilder.from_csv("./sample/samp_transactions.csv")
   end
@@ -15,4 +16,5 @@ class TransactionBuilderTest < MiniTest::Unit::TestCase
   #   assert_operator 5, :<=, @output.size
   # end
 
+  end
 end
