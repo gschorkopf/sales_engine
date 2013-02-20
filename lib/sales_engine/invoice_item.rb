@@ -21,9 +21,14 @@ module SalesEngine
     end
 
     def self.paid_ii
-      @paid_ii = @ii_totals.collect do |ii|
-        ii if Invoice.find_by_id(ii.invoice_id).paid?
+      @paid_ii = []
+      collection.each do |ii|
+        if Invoice.find_by_id(ii.invoice_id).paid?
+          @paid_ii << ii
+        end
       end
+      @paid_ii
+      #no matching test
     end
 
     def self.random

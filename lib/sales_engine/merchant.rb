@@ -75,7 +75,7 @@ module SalesEngine
 
     def self.most_items(number)
       invoice_item_amount_hash = Hash.new(0)
-      InvoiceItem.collection.each do |invoice_item|
+      InvoiceItem.paid_ii.each do |invoice_item|
         amount = invoice_item.quantity
         invoice_item_amount_hash[invoice_item.invoice_id] += amount
       end
