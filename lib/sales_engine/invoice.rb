@@ -64,8 +64,7 @@ module SalesEngine
     end
 
     def items
-      invoice_item_collection = InvoiceItem.find_all_by_invoice_id(id)
-      items_collection = invoice_item_collection.collect {|invoice_item| invoice_item.item_id == Item.find_by_id(invoice_item.item_id)}
+      invoice_items.collect{|invoice_item| invoice_item.item}  
     end
 
     def customer
