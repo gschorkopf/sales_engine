@@ -69,5 +69,23 @@ module SalesEngine
       @transaction_totals.find_all {|transaction| transaction.result == input.downcase}
     end
 
+    def self.new_id
+      collection.count + 1
+    end
+
+    def self.create(input)
+      new_trans = Transaction.new(
+        {'id' => new_id,
+        'invoice_id' => input['invoice_id'],
+        'credit_card_number' => input['credit_card_number'],
+        'credit_card_expiration_date' => input['credit_card_expiration_date'],
+        'result' => input['result'],
+        'created_at' => Time.now.to_s,
+        'updated_at' => Time.now.to_s}
+        )
+      @transaction_totals << new_trans
+      return new_trans
+    end
+
   end
 end

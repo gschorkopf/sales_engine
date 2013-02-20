@@ -20,6 +20,17 @@ module SalesEngine
       @ii_totals
     end
 
+    def self.paid_ii
+      @paid_ii = []
+      collection.each do |ii|
+        if Invoice.find_by_id(ii.invoice_id).paid?
+          @paid_ii << ii
+        end
+      end
+      @paid_ii
+      #no matching test
+    end
+
     def self.random
       @ii_totals.sample
     end
@@ -54,7 +65,7 @@ module SalesEngine
 
     def self.price_hash
       hash = Hash.new(0)
-      InvoiceItem.collection.each do |invoice_item| 
+      InvoiceItem.paid_ii.each do |invoice_item| 
         revenue = invoice_item.unit_price * invoice_item.quantity
         hash[invoice_item.invoice_id] += revenue
       end
@@ -71,17 +82,17 @@ module SalesEngine
 
     ### Begin untested section
     def self.new_id
-      collection.count + 1 #Cheating way?
+      collection.count + 1
     end
 
     def self.create(input)
-      new_ii = InvoiceItem.new({"id" => new_id,
-                                "item_id" => input[:item_id],
-                                "invoice_id" => input[:invoice_id],
-                                "quantity" => input[:quantity],
-                                "unit_price" => input[:unit_price],
-                                "created_at" => Time.now.to_s, 
-                                "updated_at" => Time.now.to_s})
+      new_ii = InvoiceItem.new({'id' => new_id,
+                                'item_id' => input['item_id'],
+                                'invoice_id' => input['invoice_id'],
+                                'quantity' => input['quantity'],
+                                'unit_price' => input['unit_price'],
+                                'created_at' => Date.new.to_s, 
+                                'updated_at' => Date.new.to_s})
       @ii_totals << new_ii
     end
     ### End untested section
