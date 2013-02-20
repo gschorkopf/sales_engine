@@ -81,12 +81,7 @@ module SalesEngine
         revenue_generated = amount * price
         item_id_revenue_hash[invoice_item.item_id] += revenue_generated
       end
-
-      output_list = []
-      sorted_array = Hash[item_id_revenue_hash.sort_by {|item_id, revenue| revenue}.reverse]
-      sorted_array.keys[0..number-1].each {|item_id| output_list << Item.find_by_id(item_id)}
-
-      return output_list
+      sort_hash(item_id_revenue_hash, number)
     end
 
     def self.most_items(number)
@@ -95,11 +90,15 @@ module SalesEngine
         amount = invoice_item.quantity
         invoice_item_amount_hash[invoice_item.item_id] += amount
       end
+      sort_hash(invoice_item_amount_hash, number)
+    end
 
+    def self.sort_hash(hash, num)
       output_list = []
-      sorted_array = Hash[invoice_item_amount_hash.sort_by {|item_id, amount| amount}.reverse]
-      sorted_array.keys[0..number-1].each {|item_id| output_list << Item.find_by_id(item_id)}
-
+      sorted_array = Hash[hash.sort_by {|k, v| v}.reverse]
+      sorted_array.keys[0,num].each do |k| 
+        output_list << Item.find_by_id(k)
+      end
       return output_list
     end
 
