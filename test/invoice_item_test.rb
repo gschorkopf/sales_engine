@@ -14,16 +14,15 @@ module SalesEngine
       assert_kind_of InvoiceItem, ii
     end
 
-<<<<<<< HEAD
     # new test
     def test_find_by_id_finds_single_instance_of_matching_id
       ii = InvoiceItem.find_by_id(5)
       assert_equal 5, ii.id
-=======
+    end
+
     def test_ii_paid_returns_collection_of_paid_for_iis
       paid_ii = InvoiceItem.paid_ii
       assert_equal 6, paid_ii.length
->>>>>>> d6dbe38901f35557153e1f88291431d800410f89
     end
 
     def test_find_all_by_invoice_id_returns_collect_of_invoice_items
