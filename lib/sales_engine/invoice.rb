@@ -79,14 +79,20 @@ module SalesEngine
       !paid?
     end
 
+    def self.new_id
+      collection.count + 1
+    end
+
     ### Begin untested section
     def self.create(input)
-      new_invoice = Invoice.new('customer_id'=>input[:customer].id, 
-                  'merchant_id'=>input[:merchant].id,
-                  'status'=>input[:status],
-                  'created_at'=>Time.now.to_s,
-                  'updated_at'=>Time.now.to_s
-                  )
+      new_invoice = Invoice.new({
+        'id'=> new_id,
+        'customer_id'=>input[:customer].id, 
+        'merchant_id'=>input[:merchant].id,
+        'status'=>input[:status],
+        'created_at'=>Time.now.to_s,
+        'updated_at'=>Time.now.to_s
+        })
       @invoice_totals << new_invoice
 
       new_items = input[:items]
@@ -97,16 +103,22 @@ module SalesEngine
       end
 
       items_count.each do |item, quantity|
-        InvoiceItem.create("invoice_id" => new_invoice.id,
-                          "item_id" => item.id,
-                          "unit_price" => item.unit_price,
-                          "quantity" => quantity
-                          )
+        InvoiceItem.create(
+          'invoice_id' => new_invoice.id,
+          'item_id' => item.id,
+          'unit_price' => item.unit_price,
+          'quantity' => quantity
+          )
       end
     end
 
-    def charge
-      ### code here
+    def charge(input)
+      Transaction.create(
+        'credit_card_number' => input[:credit_card_number],
+        'credit_card_expiration' => input[:credit_card_expiration],
+        'result' => input[:result],
+        'invoice_id' => id
+        )
     end
 
     ###End untested section

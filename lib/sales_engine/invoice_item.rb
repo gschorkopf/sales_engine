@@ -81,13 +81,13 @@ module SalesEngine
     end
 
     def self.create(input)
-      new_ii = InvoiceItem.new({"id" => new_id,
-                                "item_id" => input[:item_id],
-                                "invoice_id" => input[:invoice_id],
-                                "quantity" => input[:quantity],
-                                "unit_price" => input[:unit_price],
-                                "created_at" => Time.now.to_s, 
-                                "updated_at" => Time.now.to_s})
+      new_ii = InvoiceItem.new({'id' => new_id,
+                                'item_id' => input[:item_id],
+                                'invoice_id' => input[:invoice_id],
+                                'quantity' => input[:quantity],
+                                'unit_price' => input[:unit_price],
+                                'created_at' => Time.now.to_s, 
+                                'updated_at' => Time.now.to_s})
       @ii_totals << new_ii
     end
     ### End untested section
