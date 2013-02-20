@@ -4,7 +4,7 @@ class Merchant
   def initialize(hash)
     @id = hash['id'].to_i
     @name = hash['name']
-    @created_at = hash['created_at']
+    @created_at = Date.parse(hash['created_at'])
     @updated_at = hash['updated_at']
   end
 
@@ -92,8 +92,12 @@ class Merchant
     return output_list 
   end
 
-  def revenue
-    Merchant.merchant_revenue_hash[id]
+  def revenue(date = "none given")
+    if date == "none given"
+      Merchant.merchant_revenue_hash[id]
+    else
+      # INSERT CODE HERE
+    end
   end
 
   def self.revenue(date)
@@ -105,43 +109,31 @@ class Merchant
     creation_date_revenue_hash[Date.parse(date)]
   end
 
-# returns the Customer who has conducted the most successful transactions
-#   def favorite_customer
-#     successful_transactions_hash = Hash.new(0)
-#     transactions.each do |transactions|
-#       successful_transactions_hash[transactions.invoice_id] += successful_trans
-#     end
+  def favorite_customer
+    inv_ids = Transaction.all_successful.collect do |successful_transaction|
+      successful_transaction.invoice_id
+    end
+    
+    cust_id_trans_hash = Hash.new(0)
+    inv_ids.each do |inv_id|
+      cust_id_trans_hash[Invoice.find_by_id(inv_id).customer_id] += 1
+    end
 
-#     best_customer_hash = Hash.new(0)
-#     successful_transactions_hash.each_pair do |trans_id, success|
-#       transaction_object  = Transaction.find_by_id(trans_id)
-#       customer_object = Customer.find_by_id(transaction_object.result)
-#       # best_customer_hash[customer_object.id] += successful_trans
-#     end
+    top_customer = cust_id_trans_hash.sort_by {|cust_id, trans| trans}.reverse.first.first
+    # REFACTORING WEDNESDAY BLASDHLASIDHSAOHOAS!!!
+    Customer.find_by_id(top_customer)
+  end
 
-#     # need to return customer info
-#   end
+  def customers_with_pending_invoices
+    pending_array = []
 
-# # returns the total revenue for that merchant for a specific invoice date
-#   def revenue(date)
-
-#     invoice_date_revenue_hash = Hash.new(0)
-#     invoice.each do |invoice_date| 
-#       invoice_date = invoice_item.created_at # not sure if this is necessary but we need to call dates from "created_at" column
-#       revenue = invoice_item.unit_price * invoice_item.quantity
-#       invoice_date_revenue_hash[invoice_item.invoice_date] += revenue
-#     end
-
-#     merchant_date_revenue_hash = Hash.new(0)
-#     invoice_date_revenue_hash.each_pair do |inv_id, revenue|
-#       invoice_object = Invoice.find_by_id(inv_id)
-#       merchant_object = Merchant.find_by_id(invoice_object.merchant_id)
-#       merchant_date_revenue_hash[merchant_object.id] += revenue
-#     end
-
-#     # need to return a merchant's total revenue
-#     # not sure where to include .strptime for parsing date info
-#   end
+    Invoice.collection.each do |invoice|
+      if invoice.merchant_id == id && invoice.pending?
+        pending_array << Customer.find_by_id(invoice.customer_id)
+      end
+    end
+    pending_array
+  end
 
 end
 

@@ -8,10 +8,11 @@ class MerchantTest < MiniTest::Unit::TestCase
     InvoiceItemBuilder.from_csv("./sample/samp_invoice_items.csv")
     InvoiceBuilder.from_csv("./sample/samp_invoices.csv")
     TransactionBuilder.from_csv("./sample/samp_transactions.csv")
+    CustomerBuilder.from_csv("./sample/samp_customers.csv")
   end
 
   def test_it_exists
-    merchant = Merchant.new('sample_hash')
+    merchant = Merchant.random
     assert_kind_of Merchant, merchant
   end
 
@@ -72,10 +73,20 @@ class MerchantTest < MiniTest::Unit::TestCase
     assert_equal 1117643, date_amount
   end
 
+  # def test_instance_variable_revenue_date_returns_total_rev_for_specific_date
+  #   date_amount = Merchant.find_by_id(75).revenue('Sat, 25 Mar 2012')
+  #   assert_equal 1117643, date_amount
+  # end
 
+  def test_favorite_customer_returns_customer_with_most_transactions
+    merchant = Merchant.find_by_id(75)
+    assert_equal "Joey", merchant.favorite_customer.first_name
+  end
 
-
-
+  def test_customers_with_pending_invoices_returns_collection_of_customers_with_unpaid_invoices
+    merchant = Merchant.find_by_id(75)
+    assert_equal 1, merchant.customers_with_pending_invoices.length
+  end
 
 
 

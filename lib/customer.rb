@@ -56,10 +56,10 @@ class Customer
   end
 
   def favorite_merchant
-    invoice_list = Invoice.find_all_by_customer_id(id)
+    # invoice_list = Invoice.find_all_by_customer_id(id)
 
-    success_list = Transaction.all_successful
-    merch_id_list = success_list.collect {|inv_id| Invoice.find_by_id(inv_id).merchant_id}
+    # success_list = Transaction.all_successful
+    # merch_id_list = success_list.collect {|inv_id| Invoice.find_by_id(inv_id).merchant_id}
 
     # merchant_invoice_hash = Hash.new(0)
     # invoice_list.each do |invoice|

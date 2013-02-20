@@ -69,7 +69,7 @@ class InvoiceTest < MiniTest::Unit::TestCase
 
   def test_find_all_by_status_finds_all_invoices_by_status
     invoice = Invoice.find_all_by_status('shipped')
-    assert_equal 6, invoice.length
+    assert_equal 7, invoice.length
   end
 
   def test_transaction_method_on_invoice_returns_collection

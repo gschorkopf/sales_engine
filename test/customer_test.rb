@@ -71,9 +71,9 @@ class CustomerTest < MiniTest::Unit::TestCase
     assert_equal 6, joey.transactions.length
   end
 
-  def test_favorite_merchant_method_returns_fav_merchant_based_on_successful_transactions
-    joey = Customer.find_by_first_name("Joey")
-    assert_equal "Eichmann-Turcotte", joey.favorite_merchant.name
-  end
+  # def test_favorite_merchant_method_returns_fav_merchant_based_on_successful_transactions
+  #   joey = Customer.find_by_first_name("Joey")
+  #   assert_equal "Eichmann-Turcotte", joey.favorite_merchant.name
+  # end
 
 end

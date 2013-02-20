@@ -46,7 +46,7 @@ class Transaction
   def self.all_successful
     success_array = []
     @transaction_totals.each do |transaction| 
-      if transaction.is_successful? == true
+      if transaction.success? == true
         success_array << transaction
       end
     end
