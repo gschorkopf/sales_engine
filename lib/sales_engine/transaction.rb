@@ -36,6 +36,10 @@ module SalesEngine
       @transaction_totals.find_all {|transaction| transaction.invoice_id == input.to_i}
     end
 
+    def self.find_by_credit_card_number(input)
+      @transaction_totals.find {|transaction| transaction.credit_card_number == input.to_i}
+    end
+
     def invoice
       Invoice.find_by_id(invoice_id)  
     end

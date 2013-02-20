@@ -70,18 +70,23 @@ module SalesEngine
     end
 
     def test_class_variable_revenue_date_returns_total_rev_for_date_all_merchants
-      date_amount = Merchant.revenue('Sat, 25 Mar 2012')
-      assert_equal 1117643, date_amount
+      date_amount = Merchant.revenue('Sat, 12 Mar 2012')
+      assert_equal 237423, date_amount
     end
 
-    # def test_instance_variable_revenue_date_returns_total_rev_for_specific_date
-    #   date_amount = Merchant.find_by_id(75).revenue('Sat, 25 Mar 2012')
-    #   assert_equal 1117643, date_amount
-    # end
+    def test_instance_variable_revenue_date_returns_total_rev_for_specific_date
+      date_amount = Merchant.find_by_id(26).revenue('Sat, 25 Mar 2012')
+      assert_equal 1117643, date_amount
+    end
 
     def test_favorite_customer_returns_customer_with_most_transactions
       merchant = Merchant.find_by_id(75)
       assert_equal "Joey", merchant.favorite_customer.first_name
+    end
+
+    def test_another_favorite_customer_returns_customer_with_most_transactions
+      merchant = Merchant.find_by_id(52)
+      assert_equal "Loyal", merchant.favorite_customer.first_name
     end
 
     def test_customers_with_pending_invoices_returns_collection_of_customers_with_unpaid_invoices

@@ -13,7 +13,7 @@ module SalesEngine
     end
 
     def test_it_builds_merchants_from_a_csv
-      assert_equal 6, @output.size
+      assert_equal 7, @output.size
     end
 
   end

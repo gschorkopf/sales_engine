@@ -97,7 +97,13 @@ module SalesEngine
       if date == "none given"
         Merchant.merchant_revenue_hash[id]
       else
-        # INSERT CODE HERE
+        date_revenue_hash = Hash.new(0) 
+        InvoiceItem.price_hash.each_pair do |inv_id, revenue|
+          create_date = Invoice.find_by_id(inv_id).created_at
+          date_revenue_hash[create_date] += revenue
+        end
+
+        date_revenue_hash[Date.parse(date)]
       end
     end
 
@@ -115,14 +121,19 @@ module SalesEngine
         successful_transaction.invoice_id
       end
       
-      cust_id_trans_hash = Hash.new(0)
+      cust_array = []
       inv_ids.each do |inv_id|
-        cust_id_trans_hash[Invoice.find_by_id(inv_id).customer_id] += 1
+        if Invoice.find_by_id(inv_id).merchant_id == id
+          cust_array << Invoice.find_by_id(inv_id).customer_id
+        end
       end
 
-      top_customer = cust_id_trans_hash.sort_by {|cust_id, trans| trans}.reverse.first.first
-      # REFACTORING WEDNESDAY BLASDHLASIDHSAOHOAS!!!
-      Customer.find_by_id(top_customer)
+      cust_id_top_hash = Hash.new(0)
+      cust_array.each do |cust_id|
+        cust_id_top_hash[Customer.find_by_id(cust_id)] += 1
+      end
+
+      cust_id_top_hash.sort_by {|customer, trans| trans}.reverse.first.first
     end
 
     def customers_with_pending_invoices

@@ -57,22 +57,38 @@ module SalesEngine
     end
 
     def favorite_merchant
-      # invoice_list = Invoice.find_all_by_customer_id(id)
+      inv_ids = Transaction.all_successful.collect do |successful_transaction|
+        successful_transaction.invoice_id
+      end
+      
+      merch_array = []
+      inv_ids.each do |inv_id|
+        if Invoice.find_by_id(inv_id).customer_id == id
+          merch_array << Invoice.find_by_id(inv_id).merchant_id
+        end
+      end
 
-      # success_list = Transaction.all_successful
-      # merch_id_list = success_list.collect {|inv_id| Invoice.find_by_id(inv_id).merchant_id}
+      merch_id_top_hash = Hash.new(0)
+      merch_array.each do |merch_id|
+        merch_id_top_hash[Merchant.find_by_id(merch_id)] += 1
+      end
 
-      # merchant_invoice_hash = Hash.new(0)
-      # invoice_list.each do |invoice|
-      #   merch_id_list.include? invoice.merchant_id  
-      #   merchant_invoice_hash[invoice.merchant_id] += 1
-      # end
-
-      # top_merchant = merchant_invoice_hash.sort_by {|k,v| v}.first[0]
-      # Merchant.find_by_id(top_merchant)
-
-      # Method definitely not correct. The "Include?" section does not account for doubles
+      merch_id_top_hash.sort_by {|merchant, trans| trans}.reverse.first.first
     end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   end
 end

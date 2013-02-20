@@ -73,10 +73,10 @@ module SalesEngine
       assert_equal 6, joey.transactions.length
     end
 
-    # def test_favorite_merchant_method_returns_fav_merchant_based_on_successful_transactions
-    #   joey = Customer.find_by_first_name("Joey")
-    #   assert_equal "Eichmann-Turcotte", joey.favorite_merchant.name
-    # end
+    def test_favorite_merchant_method_returns_fav_merchant_based_on_successful_transactions
+      joey = Customer.find_by_first_name("Joey")
+      assert_equal nil, joey.favorite_merchant #will technically be nil with our small sample, because joey bought from 3 undefined merchants
+    end
 
   end
 end
