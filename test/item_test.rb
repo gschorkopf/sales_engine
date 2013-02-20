@@ -11,7 +11,7 @@ module SalesEngine
     end
 
     def test_it_exists
-      item = Item.new('sample_hash')
+      item = Item.random
       assert_kind_of Item, item
     end
 
@@ -52,7 +52,7 @@ module SalesEngine
 
     def test_find_by_unit_price_finds_items_by_matching_unit_price
       item = Item.find_by_unit_price(75107)
-      assert_equal 75107, item.unit_price
+      assert_equal Clean.price(75107), item.unit_price
     end
 
     def test_find_all_by_unit_price_finds_all_items_by_matching_unit_price

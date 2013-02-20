@@ -80,25 +80,36 @@ module SalesEngine
       !paid?
     end
 
+    ### Begin untested section
     def self.create(input)
-      Invoice.new('customer_id'=>input[:customer].id, 
-                  'merchant_id'=>input[:merchant].id
+      new_invoice = Invoice.new('customer_id'=>input[:customer].id, 
+                  'merchant_id'=>input[:merchant].id,
+                  'status'=>input[:status],
+                  'created_at'=>Time.now.to_s,
+                  'updated_at'=>Time.now.to_s
                   )
+      @invoice_totals << new_invoice
+
+      new_items = input[:items]
+
+      items_count = Hash.new(0)
+      new_items.each do |item|
+        items_count[item] += 1 
+      end
+
+      items_count.each do |item, quantity|
+        InvoiceItem.create("invoice_id" => invoice.id,
+                          "item_id" => item.id,
+                          "unit_price" => item.unit_price,
+                          "quantity" => quantity
+                          )
+      end
     end
 
+    def charge
+      ### code here
+    end
 
-    ### Create function for final iteration
-    # def self.create(inputs)
-    #   new_invoice = InvoiceItem.new(
-    #               id: #what goes here?
-    #               customer_id: input[:customer].id,
-    #               merchant_id: input[:merchant].id,
-    #               status: input[:status]
-    #               created_at: Date.new
-    #               updated_at: Date.new
-    #               )
-    #   @invoice_totals << new_invoice  
-    # end
-
+    ###End untested section
   end
 end

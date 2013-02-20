@@ -6,7 +6,7 @@ module SalesEngine
       @id = hash['id'].to_i
       @name = hash['name']
       @description = hash['description']
-      @unit_price = hash['unit_price'].to_i
+      @unit_price = Clean.price(hash['unit_price'])
       @merchant_id = hash['merchant_id'].to_i
       @created_at = hash['created_at']
       @updated_at = hash['updated_at']
@@ -49,11 +49,11 @@ module SalesEngine
     end
 
     def self.find_by_unit_price(input) 
-      @item_totals.find {|item| item.unit_price == input.to_i}
+      @item_totals.find {|item| item.unit_price == Clean.price(input)}
     end
 
     def self.find_all_by_unit_price(input)
-      @item_totals.find_all {|item| item.unit_price == input.to_i}
+      @item_totals.find_all {|item| item.unit_price == Clean.price(input)}
     end  
 
     def self.find_by_merchant_id(input) 

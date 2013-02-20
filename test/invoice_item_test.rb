@@ -10,7 +10,7 @@ module SalesEngine
     end
     
     def test_it_exists
-      ii = InvoiceItem.new('sample_hash')
+      ii = InvoiceItem.random
       assert_kind_of InvoiceItem, ii
     end
 

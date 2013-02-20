@@ -7,7 +7,7 @@ module SalesEngine
       @item_id = hash['item_id'].to_i
       @invoice_id = hash['invoice_id'].to_i
       @quantity = hash['quantity'].to_i
-      @unit_price = hash['unit_price'].to_i
+      @unit_price = Clean.price(hash['unit_price'])
       @created_at = hash['created_at']
       @updated_at = hash['updated_at']
     end
@@ -18,6 +18,10 @@ module SalesEngine
 
     def self.collection
       @ii_totals
+    end
+
+    def self.random
+      @ii_totals.sample
     end
 
     def self.find_by_id(input)
@@ -60,5 +64,21 @@ module SalesEngine
       Item.find_by_id(item_id)
     end
 
+    ### Begin untested section
+    def self.new_id
+      collection.count + 1 #Cheating way?
+    end
+
+    def self.create(input)
+      new_ii = InvoiceItem.new({"id" => new_id,
+                                "item_id" => input[:item_id],
+                                "invoice_id" => input[:invoice_id],
+                                "quantity" => input[:quantity],
+                                "unit_price" => input[:unit_price],
+                                "created_at" => Time.now.to_s, 
+                                "updated_at" => Time.now.to_s})
+      @ii_totals << new_ii
+    end
+    ### End untested section
   end
 end

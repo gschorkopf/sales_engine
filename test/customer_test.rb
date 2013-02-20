@@ -12,7 +12,7 @@ module SalesEngine
     end
 
     def test_it_exists
-      customer = Customer.new('sample_hash')
+      customer = Customer.random
       assert_kind_of Customer, customer
     end
 

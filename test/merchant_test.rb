@@ -66,17 +66,17 @@ module SalesEngine
 
     def test_revenue_returns_total_rev_for_specific_merch
       merchant = Merchant.find_by_id(75)
-      assert_equal 237423, merchant.revenue
+      assert_equal Clean.price(237423), merchant.revenue
     end
 
     def test_class_variable_revenue_date_returns_total_rev_for_date_all_merchants
       date_amount = Merchant.revenue('Sat, 12 Mar 2012')
-      assert_equal 237423, date_amount
+      assert_equal Clean.price(237423), date_amount
     end
 
     def test_instance_variable_revenue_date_returns_total_rev_for_specific_date
       date_amount = Merchant.find_by_id(26).revenue('Sat, 25 Mar 2012')
-      assert_equal 1117643, date_amount
+      assert_equal Clean.price(1117643), date_amount
     end
 
     def test_favorite_customer_returns_customer_with_most_transactions
