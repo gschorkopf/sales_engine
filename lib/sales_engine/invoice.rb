@@ -93,12 +93,16 @@ module SalesEngine
         'merchant_id'=>input[:merchant].id,
         'status'=>input[:status],
         'created_at'=>Date.new.to_s,
-        'updated_at'=>Date.new.to_s
-        })
+        'updated_at'=>Date.new.to_s})
       @invoice_totals << new_invoice
 
       new_items = input[:items]
+      create_new_items(new_items, new_invoice)
 
+      return new_invoice
+    end
+
+    def self.create_new_items(new_items, new_invoice)
       items_count = Hash.new(0)
       new_items.each do |item|
         items_count[item] += 1
@@ -109,10 +113,8 @@ module SalesEngine
           'invoice_id' => new_invoice.id,
           'item_id' => item.id,
           'unit_price' => item.unit_price,
-          'quantity' => quantity
-          )
+          'quantity' => quantity)
       end
-      return new_invoice
     end
 
     def charge(input)
@@ -120,8 +122,7 @@ module SalesEngine
         'credit_card_number' => input[:credit_card_number],
         'credit_card_expiration' => input[:credit_card_expiration],
         'result' => input[:result],
-        'invoice_id' => id
-        )
+        'invoice_id' => id)
     end
 
     ###End untested section

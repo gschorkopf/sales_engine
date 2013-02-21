@@ -66,19 +66,24 @@ module SalesEngine
       inv_ids = Transaction.all_successful.collect do |successful_transaction|
         successful_transaction.invoice_id
       end
+      convert_to_merch_id(inv_ids)
+    end
 
+    def convert_to_merch_id(array)
       merch_array = []
-      inv_ids.each do |inv_id|
+      array.each do |inv_id|
         if Invoice.find_by_id(inv_id).customer_id == id
           merch_array << Invoice.find_by_id(inv_id).merchant_id
         end
       end
+      output_top_merchant(merch_array)
+    end
 
+    def output_top_merchant(array)
       merch_id_top_hash = Hash.new(0)
-      merch_array.each do |merch_id|
+      array.each do |merch_id|
         merch_id_top_hash[Merchant.find_by_id(merch_id)] += 1
       end
-
       merch_id_top_hash.sort_by {|merchant, trans| trans}.reverse.first.first
     end
 
