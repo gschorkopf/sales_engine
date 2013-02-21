@@ -131,19 +131,24 @@ module SalesEngine
       inv_ids = Transaction.all_successful.collect do |successful_transaction|
         successful_transaction.invoice_id
       end
+      convert_to_cust_ids(inv_ids)
+    end
 
+    def convert_to_cust_ids(array)
       cust_array = []
-      inv_ids.each do |inv_id|
+      array.each do |inv_id|
         if Invoice.find_by_id(inv_id).merchant_id == id
           cust_array << Invoice.find_by_id(inv_id).customer_id
         end
       end
+      output_favorite_customer(cust_array)
+    end
 
+    def output_favorite_customer(array)
       cust_id_top_hash = Hash.new(0)
-      cust_array.each do |cust_id|
+      array.each do |cust_id|
         cust_id_top_hash[Customer.find_by_id(cust_id)] += 1
       end
-
       cust_id_top_hash.sort_by {|customer, trans| trans}.reverse.first.first
     end
 
