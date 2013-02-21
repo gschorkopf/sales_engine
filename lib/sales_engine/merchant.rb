@@ -77,28 +77,19 @@ module SalesEngine
       Merchant.find_all_by_ids(merchant_ids)
     end
 
-    def self.most_items(number)
-      ii_amt_hash = Hash.new(0)
-      InvoiceItem.paid_ii.each do |invoice_item|
-        amount = invoice_item.quantity
-        ii_amt_hash[invoice_item.invoice_id] += amount
-      end
-
-      merchant_quantity_hash = Hash.new(0)
-      ii_amt_hash.each_pair do |inv_id, amount|
-        merchant = Merchant.find_by_invoice_id(inv_id)
-        merchant_quantity_hash[merchant.id] += amount
-      end
-      sort_items(merchant_quantity_hash, number)
+    def paid_invoices
+      invoices.select{|invoice| invoice.paid?}
     end
 
-    def self.sort_items(hash, num)
-      output_list = []
-      sorted_array = Hash[hash.sort_by {|k, v| v}.reverse]
-      sorted_array.keys[0,num].each do |merch_id|
-        output_list << Merchant.find_by_id(merch_id)
+    def number_of_items_sold
+      paid_invoices.collect{|invoice| invoice.item_quantity}.inject(:+) || 0
+    end
+
+    def self.most_items(number)
+      sorted_merchants = collection.sort_by do |merchant|
+        merchant.number_of_items_sold
       end
-      return output_list
+      sorted_merchants.reverse.take(number)
     end
 
     def revenue(date = :all)

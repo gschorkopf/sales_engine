@@ -12,6 +12,10 @@ module SalesEngine
       @updated_at = Date.parse(hash['updated_at']) if hash['updated_at']
     end
 
+    def item_quantity
+      invoice_items.collect{|invoice_item| invoice_item.quantity}.inject(:+)
+    end
+
     def self.store(array)
       @invoice_totals = array
     end
@@ -85,7 +89,6 @@ module SalesEngine
       collection.count + 1
     end
 
-    ### Begin untested section
     def self.create(input)
       new_invoice = Invoice.new({
         'id'=> new_id,
@@ -124,7 +127,5 @@ module SalesEngine
         'result' => input[:result],
         'invoice_id' => id)
     end
-
-    ###End untested section
   end
 end
